@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Settings as SettingsIcon, Bell, Shield, Palette, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { TeamManager } from '@/components/TeamManager';
 
 const Settings = () => {
   const { user } = useAuth();
@@ -20,6 +21,16 @@ const Settings = () => {
       </div>
     );
   }
+
+  // Mock data for now (replace with real API/context wiring)
+  const mockTeam = [
+    { id: '1', name: user.first_name + ' ' + user.last_name, email: user.email, role: user.account_type === 'team' && user.tier === 'premium' ? 'owner' : 'member', status: 'active' },
+    // Add more mock members if needed
+  ];
+  const mockInvites = [
+    // { id: 'inv1', email: 'pending@example.com', status: 'pending' },
+  ];
+  const currentUser = mockTeam[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -69,6 +80,12 @@ const Settings = () => {
                   <strong>Account Type:</strong> <span className={`inline-block px-2 py-1 rounded text-xs font-semibold ${user.account_type === 'team' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'}`}>{user.account_type ? user.account_type.charAt(0).toUpperCase() + user.account_type.slice(1) : 'Solo'}</span>
                 </p>
               </div>
+              {user.account_type === 'team' && (
+                <div className="mt-8">
+                  <h2 className="text-lg font-semibold mb-2">Team Management</h2>
+                  <TeamManager team={mockTeam} invites={mockInvites} currentUser={currentUser} onTeamChange={() => { /* TODO: refresh team/invite data from API */ }} />
+                </div>
+              )}
             </CardContent>
           </Card>
 

@@ -834,4 +834,75 @@ export const uploadResume = async (file: File) => {
 export const processResume = async () => {
   const response = await api.post('/resume/process');
   return response.data;
+};
+
+// Team & Invite API
+export interface Team {
+  id: string;
+  owner_id: string;
+  name?: string;
+  created_at: string;
+}
+
+export interface Invite {
+  id: string;
+  email: string;
+  team_id: string;
+  inviter_id: string;
+  expires_at: string;
+  accepted: boolean;
+  accepted_at?: string;
+  revoked: boolean;
+  created_at: string;
+}
+
+export const getTeamMembersAndInvites = async (): Promise<{ members: any[]; invites: Invite[] }> => {
+  const response = await api.get('/auth/team/members');
+  return response.data;
+};
+
+export const sendTeamInvite = async (email: string): Promise<Invite> => {
+  // This is handled via onboarding or a dedicated endpoint (not shown in backend, but assumed as POST /auth/invite)
+  const response = await api.post('/auth/invite', { email });
+  return response.data;
+};
+
+export const acceptInvite = async (inviteId: string): Promise<any> => {
+  const response = await api.post(`/auth/invite/accept?invite_id=${inviteId}`);
+  return response.data;
+};
+
+export const revokeInvite = async (inviteId: string): Promise<any> => {
+  const response = await api.post(`/auth/invite/revoke?invite_id=${inviteId}`);
+  return response.data;
+};
+
+export const transferTeamOwnership = async (newOwnerId: string): Promise<any> => {
+  const response = await api.post(`/auth/team/transfer_ownership?new_owner_id=${newOwnerId}`);
+  return response.data;
+};
+
+// Notification API (placeholder, backend to implement)
+export interface Notification {
+  id: string;
+  type: 'invite' | 'mention' | 'comment' | 'team' | 'system';
+  message: string;
+  created_at: string;
+  read: boolean;
+  // Add more fields as needed
+}
+
+export const getNotifications = async (): Promise<Notification[]> => {
+  // TODO: Wire to backend when implemented
+  return [];
+};
+
+export const markNotificationRead = async (notificationId: string): Promise<void> => {
+  // TODO: Wire to backend when implemented
+  return;
+};
+
+export const clearAllNotifications = async (): Promise<void> => {
+  // TODO: Wire to backend when implemented
+  return;
 }; 

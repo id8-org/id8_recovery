@@ -93,26 +93,28 @@ async def generate_personalized_ideas(
     db: Any,
     additional_context: str = ""
 ) -> Dict[str, Any]:
-    """Generate personalized ideas based on user profile and preferences"""
+    """Generate personalized ideas based on user profile and preferences. For team accounts, aggregate all team member profiles."""
     try:
-        # Get user profile and resume
-        profile = db.query(UserProfile).filter(UserProfile.user_id == user.id).first()
-        resume = db.query(UserResume).filter(UserResume.user_id == user.id).first()
-        
-        # Build personalized context
-        user_context = build_user_context(user, profile, resume)
-        
+        if user.account_type == 'team' and user.team_id:
+            # Aggregate all team member profiles
+            team_members = db.query(User).filter(User.team_id == user.team_id).all()
+            team_contexts = []
+            for member in team_members:
+                profile = db.query(UserProfile).filter(UserProfile.user_id == member.id).first()
+                resume = db.query(UserResume).filter(UserResume.user_id == member.id).first()
+                team_contexts.append(build_user_context(member, profile, resume))
+            user_context = '\n\n'.join(team_contexts)
+        else:
+            # Get user profile and resume
+            profile = db.query(UserProfile).filter(UserProfile.user_id == user.id).first()
+            resume = db.query(UserResume).filter(UserResume.user_id == user.id).first()
+            user_context = build_user_context(user, profile, resume)
         # Combine with additional context
         full_context = f"{user_context}\n\nAdditional Context: {additional_context}" if additional_context else user_context
-        
         # Generate ideas using the personalized context
         result = await generate_idea_pitches(repo_description, full_context)
-        
-        # Add user context to the result for debugging
         result['user_context'] = user_context
-        
         return result
-        
     except Exception as e:
         logger.error(f"Error generating personalized ideas for user {user.id}: {e}")
         raise
@@ -122,34 +124,31 @@ async def generate_personalized_deep_dive(
     user: User,
     db: Any
 ) -> Dict[str, Any]:
-    """Generate personalized deep dive analysis based on user profile"""
+    """Generate personalized deep dive analysis based on user profile. For team accounts, aggregate all team member profiles."""
     try:
         logger.info(f"[PersonalizedDeepDive] Starting personalized deep dive for user {user.id}")
-        
-        # Get user profile and resume
-        profile = db.query(UserProfile).filter(UserProfile.user_id == user.id).first()
-        resume = db.query(UserResume).filter(UserResume.user_id == user.id).first()
-        
-        # Build personalized context
-        user_context = build_user_context(user, profile, resume)
+        if user.account_type == 'team' and user.team_id:
+            team_members = db.query(User).filter(User.team_id == user.team_id).all()
+            team_contexts = []
+            for member in team_members:
+                profile = db.query(UserProfile).filter(UserProfile.user_id == member.id).first()
+                resume = db.query(UserResume).filter(UserResume.user_id == member.id).first()
+                team_contexts.append(build_user_context(member, profile, resume))
+            user_context = '\n\n'.join(team_contexts)
+        else:
+            profile = db.query(UserProfile).filter(UserProfile.user_id == user.id).first()
+            resume = db.query(UserResume).filter(UserResume.user_id == user.id).first()
+            user_context = build_user_context(user, profile, resume)
         logger.info(f"[PersonalizedDeepDive] Built user context (length: {len(user_context)})")
-        
-        # Add user context to idea data for personalization
         enhanced_idea_data = idea_data.copy()
         enhanced_idea_data['user_context'] = user_context
         logger.info(f"[PersonalizedDeepDive] Enhanced idea data keys: {list(enhanced_idea_data.keys())}")
-        
-        # Generate deep dive with personalized context
-        logger.info(f"[PersonalizedDeepDive] About to call generate_deep_dive")
         result = await generate_deep_dive(enhanced_idea_data)
         logger.info(f"[PersonalizedDeepDive] generate_deep_dive returned result type: {type(result)}")
         logger.debug(f"[PersonalizedDeepDive] Result keys: {list(result.keys()) if isinstance(result, dict) else 'Not a dict'}")
-        
-        # Patch: Robustly handle missing sections like 'Product' and never raise
         deep_dive = result.get('deep_dive', {})
         logger.info(f"[PersonalizedDeepDive] Deep dive type: {type(deep_dive)}")
         logger.debug(f"[PersonalizedDeepDive] Deep dive content: {deep_dive}")
-        
         if isinstance(deep_dive, dict):
             for section in ["Signal Score", "Summary", "Product", "Market", "Moat", "Funding"]:
                 try:
@@ -160,16 +159,12 @@ async def generate_personalized_deep_dive(
                 except Exception as section_error:
                     logger.error(f"[PersonalizedDeepDive] Error extracting section '{section}': {section_error}")
                     logger.error(f"[PersonalizedDeepDive] Section error type: {type(section_error)}")
-        
-        # Always return the result, even if some sections are missing
         logger.info(f"[PersonalizedDeepDive] Returning result successfully")
         return result
-        
     except Exception as e:
         logger.error(f"[PersonalizedDeepDive] Error generating personalized deep dive for user {user.id}: {e}")
         logger.debug(f"[PersonalizedDeepDive] Exception type: {type(e)}")
         logger.debug(f"[PersonalizedDeepDive] Exception traceback: {e}")
-        # Instead of raising, return a result with an error section
         return {
             "deep_dive": {
                 "sections": [

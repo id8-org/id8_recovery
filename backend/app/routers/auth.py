@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from datetime import timedelta
+from datetime import timedelta, datetime
 from typing import Optional
 
 from app.db import get_db
@@ -29,10 +29,11 @@ from app.schemas import (
     GoogleCodeRequest,
     UserProfileResponse
 )
-from models import User as UserModel, UserProfile as UserProfileModel, Idea
+from models import User as UserModel, UserProfile as UserProfileModel, Idea, Team, Invite
 from app.google_auth import authenticate_google_user, authenticate_google_user_with_code
 import logging
 from app.tiers import get_tier_config, get_account_type_config
+from sqlalchemy.exc import IntegrityError
 
 logger = logging.getLogger(__name__)
 
@@ -382,4 +383,115 @@ async def onboarding_step5(
     profile.onboarding_step = 5
     profile.onboarding_completed = True
     db.commit()
-    return {"message": "Onboarding completed!"} 
+    return {"message": "Onboarding completed!"}
+
+@router.post("/onboarding/complete")
+async def onboarding_complete(
+    data: dict,
+    current_user: UserModel = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    """Complete onboarding: set account type, create team/invites if needed, mark onboarding complete."""
+    account_type = data.get("accountType", "solo")
+    team_invites = data.get("teamInvites", [])
+    # Set account type
+    current_user.account_type = account_type
+    # If team, create team and invites
+    if account_type == "team":
+        # Create team
+        team = Team(owner_id=current_user.id, name=f"{current_user.first_name}'s Team")
+        db.add(team)
+        db.commit()
+        db.refresh(team)
+        # Set user's team_id
+        current_user.team_id = team.id
+        # Create invites
+        expires_at = datetime.utcnow() + timedelta(days=7)
+        for email in team_invites:
+            invite = Invite(
+                email=email,
+                team_id=team.id,
+                inviter_id=current_user.id,
+                expires_at=expires_at,
+                accepted=False,
+                revoked=False
+            )
+            db.add(invite)
+        db.commit()
+    # Mark onboarding as complete
+    profile = db.query(UserProfileModel).filter(UserProfileModel.user_id == current_user.id).first()
+    if profile:
+        profile.onboarding_completed = True
+        db.commit()
+    db.commit()
+    db.refresh(current_user)
+    return {"status": "success", "user": current_user}
+
+@router.post("/invite/accept")
+async def accept_invite(
+    invite_id: str = Query(...),
+    db: Session = Depends(get_db),
+    current_user: UserModel = Depends(get_current_active_user)
+):
+    """Accept a team invite (by invite id)."""
+    invite = db.query(Invite).filter(Invite.id == invite_id, Invite.revoked == False, Invite.accepted == False).first()
+    if not invite:
+        raise HTTPException(status_code=404, detail="Invite not found or already used/revoked.")
+    if invite.expires_at < datetime.utcnow():
+        raise HTTPException(status_code=400, detail="Invite has expired.")
+    # Add user to team
+    current_user.team_id = invite.team_id
+    current_user.account_type = 'team'
+    invite.accepted = True
+    invite.accepted_at = datetime.utcnow()
+    db.commit()
+    db.refresh(current_user)
+    return {"status": "accepted", "team_id": invite.team_id}
+
+@router.get("/team/members")
+async def list_team_members(
+    current_user: UserModel = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    """List all members and pending invites for the current user's team."""
+    if not current_user.team_id:
+        return {"members": [], "invites": []}
+    members = db.query(UserModel).filter(UserModel.team_id == current_user.team_id).all()
+    invites = db.query(Invite).filter(Invite.team_id == current_user.team_id, Invite.revoked == False, Invite.accepted == False).all()
+    return {"members": members, "invites": invites}
+
+@router.post("/invite/revoke")
+async def revoke_invite(
+    invite_id: str = Query(...),
+    db: Session = Depends(get_db),
+    current_user: UserModel = Depends(get_current_active_user)
+):
+    """Revoke a pending invite (owner only)."""
+    invite = db.query(Invite).filter(Invite.id == invite_id, Invite.revoked == False, Invite.accepted == False).first()
+    if not invite:
+        raise HTTPException(status_code=404, detail="Invite not found or already used/revoked.")
+    team = db.query(Team).filter(Team.id == invite.team_id).first()
+    if not team or team.owner_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Only the team owner can revoke invites.")
+    invite.revoked = True
+    db.commit()
+    return {"status": "revoked"}
+
+@router.post("/team/transfer_ownership")
+async def transfer_team_ownership(
+    new_owner_id: str = Query(...),
+    db: Session = Depends(get_db),
+    current_user: UserModel = Depends(get_current_active_user)
+):
+    """Transfer team ownership to another member (owner only)."""
+    if not current_user.team_id:
+        raise HTTPException(status_code=400, detail="You are not part of a team.")
+    team = db.query(Team).filter(Team.id == current_user.team_id).first()
+    if not team or team.owner_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Only the team owner can transfer ownership.")
+    new_owner = db.query(UserModel).filter(UserModel.id == new_owner_id, UserModel.team_id == team.id).first()
+    if not new_owner:
+        raise HTTPException(status_code=404, detail="New owner must be a member of the team.")
+    team.owner_id = new_owner_id
+    db.commit()
+    return {"status": "ownership_transferred", "new_owner_id": new_owner_id} 

@@ -23,7 +23,6 @@ import {
 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import logo from '@/assets/logo.png';
 
 interface OnboardingWizardProps {
   onComplete: () => void;
@@ -76,13 +75,16 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
     preferredIndustries: [] as string[],
     riskTolerance: '',
     timeAvailability: '',
-    intent: ''
+    intent: '',
+    accountType: 'solo',
+    teamInvites: [] as string[],
+    _inviteInput: '',
   });
 
-  const { user, updateProfile } = useAuth();
+  const { user, updateProfile, config } = useAuth();
   const { toast } = useToast();
 
-  const totalSteps = 7;
+  const totalSteps = 8;
   const progress = (currentStep / totalSteps) * 100;
 
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -166,7 +168,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
                 onClick={() => toggleArrayItem('skills', skill)}
                 className="justify-start"
               >
-                + {skill}
+                {`+ ${skill}`}
               </Button>
             ))}
           </div>
@@ -192,7 +194,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
                 onClick={() => toggleArrayItem('industries', industry)}
                 className="justify-start"
               >
-                + {industry}
+                {`+ ${industry}`}
               </Button>
             ))}
           </div>
@@ -303,6 +305,72 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
     </div>
   );
 
+  const renderAccountTypeStep = () => (
+    <div className="space-y-4">
+      <Label>Account Type</Label>
+      <div className="flex gap-4">
+        <Button
+          type="button"
+          variant={formData.accountType === 'solo' ? 'default' : 'outline'}
+          onClick={() => setFormData(prev => ({ ...prev, accountType: 'solo' }))}
+        >
+          Solo (Just Me)
+        </Button>
+        <Button
+          type="button"
+          variant={formData.accountType === 'team' ? 'default' : 'outline'}
+          onClick={() => setFormData(prev => ({ ...prev, accountType: 'team' }))}
+        >
+          Team (Invite Others)
+        </Button>
+      </div>
+      {formData.accountType === 'team' && (
+        <div className="mt-4">
+          <Label>Invite Team Members (by email)</Label>
+          <div className="text-xs text-gray-500 mb-2">You can invite up to {config?.max_team_members || 5} team members. They'll receive an email to join your workspace.</div>
+          <div className="flex gap-2 mb-2 flex-wrap">
+            <Input
+              type="email"
+              placeholder="Enter email address"
+              value={formData._inviteInput || ''}
+              onChange={e => setFormData(prev => ({ ...prev, _inviteInput: e.target.value }))}
+              className="w-64"
+            />
+            <Button
+              type="button"
+              onClick={() => {
+                if (formData._inviteInput && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(formData._inviteInput)) {
+                  if (formData.teamInvites.length < (config?.max_team_members || 5)) {
+                    setFormData(prev => ({
+                      ...prev,
+                      teamInvites: [...prev.teamInvites, prev._inviteInput],
+                      _inviteInput: '',
+                    }));
+                  } else {
+                    toast({ title: 'Team limit reached', description: `You can invite up to ${config?.max_team_members || 5} members.`, variant: 'destructive' });
+                  }
+                } else {
+                  toast({ title: 'Invalid email', description: 'Please enter a valid email address.', variant: 'destructive' });
+                }
+              }}
+            >
+              Add
+            </Button>
+          </div>
+          <ul className="list-disc pl-6">
+            {formData.teamInvites.map((email, idx) => (
+              <li key={email} className="flex items-center gap-2">
+                <span className="text-sm">{email}</span>
+                <Button type="button" size="sm" variant="ghost" onClick={() => setFormData(prev => ({ ...prev, teamInvites: prev.teamInvites.filter((e, i) => i !== idx) }))}>Remove</Button>
+              </li>
+            ))}
+          </ul>
+          {/* TODO: Show invite status from backend if available */}
+        </div>
+      )}
+    </div>
+  );
+
   const renderStep3 = () => (
     <div className="space-y-4">
       <Label>Skills (Select or add your own)</Label>
@@ -313,7 +381,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 mb-1">
         {SKILLS_OPTIONS.filter(skill => !formData.skills.includes(skill)).map(skill => (
-          <Button key={skill} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('skills', skill)} className="justify-start">+ {skill}</Button>
+          <Button key={skill} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('skills', skill)} className="justify-start">{`+ ${skill}`}</Button>
         ))}
       </div>
       <Input value={customIndustry} onChange={e => setCustomIndustry(e.target.value)} placeholder="Add custom skill" className="h-8 text-xs mt-2" />
@@ -335,7 +403,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 mb-1">
         {['Technology', 'Healthcare', 'Education', 'Finance', 'Environment', 'Social Impact', 'Innovation', 'Business', 'Creative Arts', 'Sports', 'Travel', 'Food & Cooking', 'Fitness', 'Gaming', 'Reading', 'Music'].filter(interest => !formData.interests.includes(interest)).map(interest => (
-          <Button key={interest} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('interests', interest)} className="justify-start">+ {interest}</Button>
+          <Button key={interest} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('interests', interest)} className="justify-start">{`+ ${interest}`}</Button>
         ))}
       </div>
       <Input value={customIndustry} onChange={e => setCustomIndustry(e.target.value)} placeholder="Add custom interest" className="h-8 text-xs mt-2" />
@@ -357,7 +425,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 mb-1">
         {['Start a side hustle', 'Build a full-time business', 'Learn new skills', 'Network with others', 'Make an impact', 'Achieve financial freedom', 'Solve a problem', 'Innovate', 'Grow a team', 'Other'].filter(goal => !formData.goals.includes(goal)).map(goal => (
-          <Button key={goal} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('goals', goal)} className="justify-start">+ {goal}</Button>
+          <Button key={goal} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('goals', goal)} className="justify-start">{`+ ${goal}`}</Button>
         ))}
       </div>
       <Input value={customIndustry} onChange={e => setCustomIndustry(e.target.value)} placeholder="Add custom goal" className="h-8 text-xs mt-2" />
@@ -379,7 +447,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 mb-1">
         {INDUSTRIES_OPTIONS.filter(ind => !formData.preferredIndustries.includes(ind)).map(industry => (
-          <Button key={industry} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('preferredIndustries', industry)} className="justify-start">+ {industry}</Button>
+          <Button key={industry} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('preferredIndustries', industry)} className="justify-start">{`+ ${industry}`}</Button>
         ))}
       </div>
       <Input value={customIndustry} onChange={e => setCustomIndustry(e.target.value)} placeholder="Add custom industry" className="h-8 text-xs" />
@@ -421,8 +489,21 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
     </div>
   );
 
-  const renderStep7 = () => (
+  const renderFinalStep = () => (
     <div className="space-y-4">
+      {formData.accountType === 'team' && (
+        <>
+          <Label>Team Setup Summary</Label>
+          <div className="text-sm text-gray-700">You've invited the following team members:</div>
+          <ul className="list-disc pl-6">
+            {formData.teamInvites.map(email => (
+              <li key={email} className="text-sm">{email} <span className="text-xs text-gray-400">(Pending)</span></li>
+            ))}
+          </ul>
+          <div className="text-xs text-gray-500 mt-2">Invited members will receive an email to join your workspace. You can manage your team in Settings after onboarding.</div>
+          <hr className="my-4" />
+        </>
+      )}
       <Label>Final Confirmation</Label>
       <div className="flex items-center gap-2">
         <input type="checkbox" id="privacy" checked={privacyChecked} onChange={e => setPrivacyChecked(e.target.checked)} />
@@ -440,11 +521,12 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
     switch (currentStep) {
       case 1: return renderStep1();
       case 2: return renderStep2();
-      case 3: return renderStep3();
-      case 4: return renderStep4();
-      case 5: return renderStep5();
-      case 6: return renderStep6();
-      case 7: return renderStep7();
+      case 3: return renderAccountTypeStep();
+      case 4: return renderStep3();
+      case 5: return renderStep4();
+      case 6: return renderStep5();
+      case 7: return renderStep6();
+      case 8: return renderFinalStep();
       default: return null;
     }
   };
@@ -504,6 +586,10 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
           });
           break;
         case 7:
+          setCurrentStep(8);
+          setIsLoading(false);
+          return;
+        case 8:
           if (!privacyChecked || !termsChecked) {
             toast({
               title: "Agreement Required",
@@ -513,9 +599,9 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
             setIsLoading(false);
             return;
           }
-          toast({
-            title: "Profile Saved!",
-            description: "Welcome to ID8! Your profile is now personalized.",
+          await api.post('/auth/onboarding/complete', {
+            ...formData,
+            teamInvites: formData.accountType === 'team' ? formData.teamInvites : [],
           });
           onComplete();
           setIsLoading(false);
@@ -541,23 +627,32 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       case 2:
         return formData.firstName && formData.lastName && formData.industry && formData.location;
       case 3:
-        return formData.skills.length > 0;
+        return !!formData.accountType;
       case 4:
-        return formData.interests.length > 0;
+        return formData.skills.length > 0;
       case 5:
-        return formData.goals.length > 0;
+        return formData.interests.length > 0;
       case 6:
-        return formData.preferredBusinessModels.length > 0 && formData.preferredIndustries.length > 0 && formData.riskTolerance && formData.timeAvailability;
+        return formData.goals.length > 0;
       case 7:
+        return formData.preferredBusinessModels.length > 0 && formData.preferredIndustries.length > 0 && formData.riskTolerance && formData.timeAvailability;
+      case 8:
         return privacyChecked && termsChecked;
       default:
         return false;
     }
   };
 
+  let logoSrc: string;
+  try {
+    logoSrc = require('@/assets/logo.png');
+  } catch {
+    logoSrc = 'https://placehold.co/120x40?text=ID8';
+  }
+
   return (
     <div>
-      <img src={logo} alt="App Logo" className="mx-auto mb-4" style={{ maxWidth: '120px' }} />
+      <img src={logoSrc} alt="App Logo" className="mx-auto mb-4" style={{ maxWidth: '120px' }} />
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-center">Onboarding</CardTitle>

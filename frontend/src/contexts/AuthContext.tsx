@@ -12,6 +12,8 @@ interface User {
   created_at: string;
   updated_at: string;
   profile?: UserProfile;
+  account_type: string;
+  tier: string;
 }
 
 interface UserProfile {

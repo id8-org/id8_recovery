@@ -19,6 +19,7 @@ class User(Base):
     # Tier and account type
     tier = Column(Enum('free', 'premium', name='user_tier'), default='free', nullable=False)
     account_type = Column(Enum('solo', 'team', name='user_account_type'), default='solo', nullable=False)
+    team_id = Column(String, ForeignKey("teams.id"), nullable=True)
     
     # OAuth fields
     oauth_provider = Column(String, nullable=True)  # 'google', 'email', etc.
@@ -33,6 +34,7 @@ class User(Base):
     resume = relationship("UserResume", back_populates="user", uselist=False)
     ideas = relationship("Idea", back_populates="user")
     shortlists = relationship("Shortlist", back_populates="user")
+    team = relationship("Team", back_populates="members", foreign_keys=[team_id])
 
 class UserProfile(Base):
     __tablename__ = "user_profiles"
@@ -283,3 +285,27 @@ class Comment(Base):
     user = relationship("User")
     parent_comment = relationship("Comment", remote_side=[id], back_populates="replies")
     replies = relationship("Comment", back_populates="parent_comment")
+
+class Team(Base):
+    __tablename__ = "teams"
+    id = Column(String, primary_key=True, default=gen_uuid)
+    owner_id = Column(String, ForeignKey("users.id"), nullable=False)
+    name = Column(String, nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+    # Relationships
+    members = relationship("User", back_populates="team", foreign_keys="User.team_id")
+    invites = relationship("Invite", back_populates="team")
+
+class Invite(Base):
+    __tablename__ = "invites"
+    id = Column(String, primary_key=True, default=gen_uuid)
+    email = Column(String, nullable=False, index=True)
+    team_id = Column(String, ForeignKey("teams.id"), nullable=False)
+    inviter_id = Column(String, ForeignKey("users.id"), nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+    accepted = Column(Boolean, default=False)
+    accepted_at = Column(DateTime, nullable=True)
+    revoked = Column(Boolean, default=False)
+    created_at = Column(DateTime, server_default=func.now())
+    # Relationships
+    team = relationship("Team", back_populates="invites")

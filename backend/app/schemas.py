@@ -152,12 +152,36 @@ class UserProfileResponse(BaseModel):
     config: dict
 
 # User schemas
+class TeamBase(BaseModel):
+    id: str
+    owner_id: str
+    name: Optional[str] = None
+    created_at: datetime
+
+class InviteBase(BaseModel):
+    id: str
+    email: str
+    team_id: str
+    inviter_id: str
+    expires_at: datetime
+    accepted: bool
+    accepted_at: Optional[datetime] = None
+    revoked: bool
+    created_at: datetime
+
+class Team(TeamBase):
+    pass
+
+class Invite(InviteBase):
+    pass
+
 class UserBase(BaseModel):
     email: EmailStr
     first_name: str
     last_name: str
     is_active: bool = True
     is_verified: bool = False
+    team_id: Optional[str] = None
 
 class UserCreate(UserBase):
     password: str
@@ -170,6 +194,7 @@ class User(UserBase):
     tier: str
     account_type: str
     config: Optional[dict] = None
+    team: Optional[Team] = None
 
     class Config:
         from_attributes = True

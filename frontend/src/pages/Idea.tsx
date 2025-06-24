@@ -412,7 +412,7 @@ export default function IdeaPage() {
             {idea.title}
           </h1>
           <div className="flex items-center gap-2 mb-4">
-            <Badge variant="outline">{idea.status.toUpperCase()}</Badge>
+            <Badge variant="secondary">{idea.status.toUpperCase()}</Badge>
             {repo && repo.language && <Badge variant="secondary">{repo.language}</Badge>}
             <span className="text-xs text-slate-500">Created: {createdAt}</span>
             {type && (
@@ -455,8 +455,7 @@ export default function IdeaPage() {
               </div>
               <div className="my-6" data-tour="collaboration">
                 <h3 className="text-lg font-semibold mb-2">Collaboration Zone</h3>
-                <ChangeProposalList idea={idea} />
-                <CommentSection idea={idea} />
+                {/* <ChangeProposalList idea={idea} /> */}
               </div>
             </TabsContent>
             {/* Deep Dive Tab */}
@@ -578,12 +577,6 @@ export default function IdeaPage() {
               )}
             </TabsContent>
           </Tabs>
-          <IdeaDetailModal
-            idea={idea}
-            repos={repos}
-            onDeepDive={handleDeepDive}
-            config={config}
-          />
         </div>
       );
     }

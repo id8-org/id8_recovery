@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Star, TrendingUp, Zap, History, Lightbulb, Briefcase, Info, Rocket, Clock, Target, BarChart, ExternalLink, Edit3, BookOpen, Globe, Target as TargetIcon, Eye, Download } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CaseStudyLookup } from './CaseStudyLookup';
 import { MarketSnapshotGenerator } from './MarketSnapshotGenerator';
 import { VCThesisComparison } from './VCThesisComparison';
@@ -30,11 +30,12 @@ interface IdeaDetailModalProps {
   config?: any;
 }
 
-export const IdeaDetailModal: React.FC<IdeaDetailModalProps> = ({ idea, repos, onDeepDive, hideActions, hideTitle, config }) => {
+export const IdeaDetailModal: React.FC<IdeaDetailModalProps> = ({ idea, repos, onDeepDive, hideActions, hideTitle, config, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
   const [deepDiveLoading, setDeepDiveLoading] = useState(false);
   const [deepDiveError, setDeepDiveError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   if (!idea) return null;
   
@@ -85,8 +86,8 @@ export const IdeaDetailModal: React.FC<IdeaDetailModalProps> = ({ idea, repos, o
               </h2>
             )}
             <div className="flex items-center gap-2 mt-1">
-              <Badge variant="outline">{idea.status.toUpperCase()}</Badge>
-              {repo && repo.language && <Badge variant="secondary">{repo.language}</Badge>}
+              <Badge variant={'outline' as const}>{idea.status.toUpperCase()}</Badge>
+              {repo && repo.language && <Badge variant={'secondary' as const}>{repo.language}</Badge>}
               <span className="text-xs text-slate-500">Created: {createdAt}</span>
             </div>
           </div>
@@ -178,8 +179,8 @@ export const IdeaDetailModal: React.FC<IdeaDetailModalProps> = ({ idea, repos, o
                           </details>
                         )}
                         <Button
-                          variant="secondary"
-                          size="lg"
+                          variant={'secondary' as const}
+                          size={'lg' as const}
                           onClick={async () => {
                             setDeepDiveLoading(true);
                             setDeepDiveError(null);
@@ -207,8 +208,8 @@ export const IdeaDetailModal: React.FC<IdeaDetailModalProps> = ({ idea, repos, o
                     <div className="text-center py-10 px-6 bg-slate-50 rounded-lg">
                       <p className="text-slate-600">No deep dive analysis available yet.</p>
                       <Button
-                        variant="secondary"
-                        size="sm"
+                        variant={'secondary' as const}
+                        size={'sm' as const}
                         className="mt-4"
                         onClick={async () => {
                           setDeepDiveLoading(true);
@@ -306,6 +307,18 @@ export const IdeaDetailModal: React.FC<IdeaDetailModalProps> = ({ idea, repos, o
             )}
           </TabsContent>
         </Tabs>
+        <div className="flex justify-end mt-8">
+          <Button
+            variant={'default' as const}
+            size={'lg' as const}
+            onClick={() => {
+              if (onClose) onClose();
+              navigate(`/ideas/${idea.id}`);
+            }}
+          >
+            Edit
+          </Button>
+        </div>
       </div>
     );
   } catch (error) {
