@@ -136,6 +136,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Plans & Account Types */}
+      <section className="py-20 px-4 max-w-5xl mx-auto">
+        <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-3xl font-bold text-blue-900 text-center mb-12">Plans & Account Types</motion.h2>
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          {/* Free Tier */}
+          <div className="bg-white rounded-xl shadow p-8 flex flex-col items-center border border-blue-100">
+            <span className="text-3xl mb-2 font-bold text-blue-900">Free</span>
+            <span className="text-lg text-blue-500 mb-4">Get started at no cost</span>
+            <ul className="text-slate-700 space-y-2 mb-4">
+              <li>✅ Unlimited idea generation</li>
+              <li>✅ Basic deep dive analysis</li>
+              <li>✅ Solo account</li>
+              <li>✅ Community support</li>
+            </ul>
+            <span className="text-xs text-slate-500">Perfect for exploring and validating your first ideas.</span>
+          </div>
+          {/* Premium Tier */}
+          <div className="bg-white rounded-xl shadow p-8 flex flex-col items-center border border-orange-200">
+            <span className="text-3xl mb-2 font-bold text-orange-500">Premium</span>
+            <span className="text-lg text-orange-400 mb-4">Unlock advanced features</span>
+            <ul className="text-slate-700 space-y-2 mb-4">
+              <li>✨ Everything in Free, plus:</li>
+              <li>✨ Advanced deep dives (market, funding, product, moat)</li>
+              <li>✨ Team accounts & collaboration</li>
+              <li>✨ Priority support</li>
+              <li>✨ Export & integration tools</li>
+            </ul>
+            <span className="text-xs text-slate-500">For founders, teams, and power users ready to launch and scale.</span>
+          </div>
+        </div>
+        {/* Account Types */}
+        <div className="flex flex-col md:flex-row gap-8 justify-center">
+          {/* Solo Account */}
+          <div className="flex-1 bg-white rounded-xl shadow p-6 flex flex-col items-center border border-blue-100">
+            <span className="text-2xl font-semibold text-blue-900 mb-2">Solo Account</span>
+            <p className="text-slate-700 text-center mb-2">For individual founders, makers, and creators. All the tools you need to go from idea to launch—on your own terms.</p>
+            <span className="text-xs text-slate-500">Upgrade anytime to unlock team features.</span>
+          </div>
+          {/* Team Account */}
+          <div className="flex-1 bg-white rounded-xl shadow p-6 flex flex-col items-center border border-orange-200">
+            <span className="text-2xl font-semibold text-orange-500 mb-2">Team Account</span>
+            <p className="text-slate-700 text-center mb-2">Collaborate with cofounders, teammates, or advisors. Share ideas, feedback, and deep dives in a secure workspace.</p>
+            <span className="text-xs text-slate-500">Available on Premium. Perfect for startups and innovation teams.</span>
+          </div>
+        </div>
+      </section>
+
       {/* Social Proof */}
       <section className="py-20 px-4 max-w-5xl mx-auto">
         <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-3xl font-bold text-blue-900 text-center mb-12">What Founders Are Saying</motion.h2>

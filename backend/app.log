@@ -4371,3 +4371,42 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
 2025-06-24 12:55:44 - llm - ERROR - 🔍 [DeepDive] Exception type: <class 'httpx.HTTPStatusError'>
 2025-06-24 12:55:44 - llm - ERROR - 🔍 [DeepDive] LLM response that caused error: None
+2025-06-24 12:57:22 - llm - ERROR - 🔍 DEBUG: call_groq called with model=llama3-70b-8192
+2025-06-24 12:57:22 - llm - ERROR - 🔍 DEBUG: Prompt length: 4246 characters
+2025-06-24 12:57:22 - llm - ERROR - 🔍 DEBUG: First 200 chars of prompt: 
+You are an experienced entrepreneur and technologist with expertise in:
+- Product development and MVP creation
+- Business strategy and market analysis
+- Technology implementation and scaling
+- User r...
+2025-06-24 12:57:22 - llm - ERROR - 🔍 DEBUG: Call stack - this is call_groq entry point
+2025-06-24 12:57:22 - llm - ERROR - 🔍 DEBUG: Attempt 1 - Making request to Groq API with key index 1...
+2025-06-24 12:57:22 - llm - ERROR - 🔍 DEBUG: Response status: 401
+2025-06-24 12:57:22 - llm - ERROR - 🔍 DEBUG: Response headers: {'date': 'Tue, 24 Jun 2025 12:57:22 GMT', 'content-type': 'application/json', 'content-length': '96', 'connection': 'keep-alive', 'cache-control': 'private, max-age=0, no-store, no-cache, must-revalidate', 'vary': 'Origin', 'x-groq-region': 'us-central-1', 'x-request-id': 'req_01jyh07eezfxyv8ffyjzkn0cv0', 'via': '1.1 google', 'cf-cache-status': 'DYNAMIC', 'set-cookie': '__cf_bm=xZA2S9E3yDAwJpTza9FS7E1u5t_AaamPnUABcKWxm8c-1750769842-1.0.1.1-J8bS3KpVlqhfe2tlrdbt.ZAIPQhtSVjO02ju1VaZrKBw.PjtzslxoqZGstAhheCGMOAhMYcskPNvdclm2soUWcldqHvA2g5BeGUdLNMC__A; path=/; expires=Tue, 24-Jun-25 13:27:22 GMT; domain=.groq.com; HttpOnly; Secure; SameSite=None', 'server': 'cloudflare', 'cf-ray': '954c63fb8b5d8fa9-BOS', 'alt-svc': 'h3=":443"; ma=86400'}
+2025-06-24 12:57:22 - llm - ERROR - ❌ ERROR in call_groq (non-retryable): Client error '401 Unauthorized' for url 'https://api.groq.com/openai/v1/chat/completions'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-06-24 12:57:22 - llm - ERROR - ❌ ERROR type: <class 'httpx.HTTPStatusError'>
+2025-06-24 12:57:22 - llm - ERROR - 🔍 [DeepDive] Error generating deep dive: Client error '401 Unauthorized' for url 'https://api.groq.com/openai/v1/chat/completions'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-06-24 12:57:22 - llm - ERROR - 🔍 [DeepDive] Exception type: <class 'httpx.HTTPStatusError'>
+2025-06-24 12:57:22 - llm - ERROR - 🔍 [DeepDive] LLM response that caused error: None
+2025-06-24 13:06:03 - llm - ERROR - 🔍 DEBUG: call_groq called with model=llama3-8b-8192
+2025-06-24 13:06:03 - llm - ERROR - 🔍 DEBUG: Prompt length: 4615 characters
+2025-06-24 13:06:03 - llm - ERROR - 🔍 DEBUG: First 200 chars of prompt: 
+You are an experienced entrepreneur and technologist with expertise in:
+- Product development and MVP creation
+- Business strategy and market analysis
+- Technology implementation and scaling
+- User r...
+2025-06-24 13:06:03 - llm - ERROR - 🔍 DEBUG: Call stack - this is call_groq entry point
+2025-06-24 13:06:03 - llm - ERROR - 🔍 DEBUG: Attempt 1 - Making request to Groq API with key index 0...
+2025-06-24 13:06:05 - llm - ERROR - 🔍 DEBUG: Response status: 200
+2025-06-24 13:06:05 - llm - ERROR - 🔍 DEBUG: Response headers: {'date': 'Tue, 24 Jun 2025 13:06:05 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'cache-control': 'private, max-age=0, no-store, no-cache, must-revalidate', 'vary': 'Origin', 'x-groq-region': 'us-central-1', 'x-ratelimit-limit-requests': '14400', 'x-ratelimit-limit-tokens': '6000', 'x-ratelimit-remaining-requests': '14399', 'x-ratelimit-remaining-tokens': '4839', 'x-ratelimit-reset-requests': '6s', 'x-ratelimit-reset-tokens': '11.61s', 'x-request-id': 'req_01jyh0qc0sfawt5sbxtdn3vem8', 'via': '1.1 google', 'cf-cache-status': 'DYNAMIC', 'set-cookie': '__cf_bm=s7tQLS6IYEbwqAK_ThBIZ6i3nfKMo6UalhnefK7ptCk-1750770365-1.0.1.1-o6zmJcti2EGw5fbvybQ5r3BIgxTgPwXTpxdE4ZwS9Fb1m9HEEzUAdhMHE.x03bvCXiLGehJJx6HiuuyGIyn0Q.erH0l8ZreUeDAFBpHFdTg; path=/; expires=Tue, 24-Jun-25 13:36:05 GMT; domain=.groq.com; HttpOnly; Secure; SameSite=None', 'server': 'cloudflare', 'cf-ray': '954c70b9791b905d-BOS', 'content-encoding': 'gzip', 'alt-svc': 'h3=":443"; ma=86400'}
+2025-06-24 13:06:05 - llm - ERROR - 🔍 DEBUG: Full API response: {'id': 'chatcmpl-58aef09f-a4c0-496c-b061-ccece46349c0', 'object': 'chat.completion', 'created': 1750770364, 'model': 'llama3-8b-8192', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': '[\n  {\n    "title": "AI-powered Technical Debt Auditor",\n    "hook": "Drowning in technical debt? Reduce code complexity...",\n    "value": "RAGFlow\'s AI detects and prioritizes technical debt...",\n    "evidence": "A study by SonarQube found 75% of code is technical debt...",\n    "differentiator": "Combines AI-driven analysis with human oversight...",\n    "call_to_action": "Partner with us to streamline your tech debt management...",\n    "type": "side_hustle",\n    "score": 9,\n    "mvp_effort": 3\n  },\n  {\n    "title": "Personalized Cybersecurity Alerts",\n    "hook": "Stay one step ahead of hackers with AI-driven alerts...",\n    "value": "RAGFlow\'s AI analyzes threat data and identifies high-risk targets...",\n    "evidence": "According to a study by Cybersecurity Ventures, AI-powered security is 90% effective...",\n    "differentiator": "Provides actionable insights and alerts for individual users...",\n    "call_to_action": "Join our beta program to revolutionize your cybersecurity experience...",\n    "type": "side_hustle",\n    "score": 8,\n    "mvp_effort": 2\n  },\n  {\n    "title": "AI-driven Sales Forecasting",\n    "hook": "Accurate sales forecasting? Reduce uncertainty and increase revenue...",\n    "value": "RAGFlow\'s AI analyzes historical data and market trends to forecast sales...",\n    "evidence": "A study by Gartner found AI-driven forecasting is 20% more accurate than traditional methods...",\n    "differentiator": "Combines machine learning with human expertise to improve accuracy...",\n    "call_to_action": "Let\'s pilot this with your sales team to drive revenue growth...",\n    "type": "full_scale",\n    "score": 9,\n    "mvp_effort": 3\n  }\n]'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'queue_time': 0.06503343000000002, 'prompt_tokens': 1000, 'prompt_time': 0.115583016, 'completion_tokens': 404, 'completion_time': 1.32105776, 'total_tokens': 1404, 'total_time': 1.436640776}, 'usage_breakdown': None, 'system_fingerprint': 'fp_8af39bf2ae', 'x_groq': {'id': 'req_01jyh0qc0sfawt5sbxtdn3vem8'}}
+2025-06-24 13:06:05 - llm - ERROR - 🔍 DEBUG: Extracted content length: 1670
+2025-06-24 13:06:05 - llm - ERROR - 🔍 DEBUG: First 200 chars of content: [
+  {
+    "title": "AI-powered Technical Debt Auditor",
+    "hook": "Drowning in technical debt? Reduce code complexity...",
+    "value": "RAGFlow's AI detects and prioritizes technical debt...",
+    ...
