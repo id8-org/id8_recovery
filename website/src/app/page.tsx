@@ -183,7 +183,7 @@ export default function Home() {
             },
             {
               name: "Jordan L.",
-              quote: "I found my cofounder through ID8's collaboration tools!",
+              quote: "I found my cofounder through ID8&apos;s collaboration tools!",
               avatar: "/assets/logo.png"
             }
           ].map((t, i) => (
