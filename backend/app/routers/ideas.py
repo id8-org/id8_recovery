@@ -1,13 +1,14 @@
 from crud import get_ideas_for_repo, request_deep_dive, save_deep_dive, add_to_shortlist, remove_from_shortlist, get_shortlist_ideas, create_deep_dive_version, get_deep_dive_versions, get_deep_dive_version, restore_deep_dive_version, update_idea_status
-from app.schemas import IdeaOut, ShortlistOut, DeepDiveVersionOut, IdeaGenerationRequest
+from app.schemas import IdeaOut, ShortlistOut, DeepDiveVersionOut, IdeaGenerationRequest, IdeaVersionQnACreate, IdeaVersionQnAOut
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Body, Header
 from sqlalchemy.orm import Session
 from llm import generate_deep_dive, generate_idea_pitches
+from app.services.idea_service import ask_llm_with_context
 from app.db import get_db
 from app.auth import get_current_active_user
 from app.services.personalized_idea_service import generate_personalized_ideas, generate_personalized_deep_dive
-from models import Idea, User
+from models import User, Idea, DeepDiveVersion, IdeaVersionQnA
 import logging
 import os
 from app.services import personalized_idea_service, idea_service
@@ -663,4 +664,43 @@ async def generate_post_mortem_api(
         
     except Exception as e:
         logger.error(f"Error generating post-mortem for idea {idea_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to generate post-mortem: {str(e)}") 
+        raise HTTPException(status_code=500, detail=f"Failed to generate post-mortem: {str(e)}")
+
+@router.post("/{idea_id}/versions/{version_number}/qna", response_model=IdeaVersionQnAOut)
+async def create_idea_version_qna(
+    idea_id: str,
+    version_number: int,
+    data: IdeaVersionQnACreate,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    # Get the version fields for context
+    version = db.query(DeepDiveVersion).filter_by(idea_id=idea_id, version_number=version_number).first()
+    if not version:
+        raise HTTPException(status_code=404, detail="Idea version not found")
+    fields = version.fields or {}
+    # Build context from selected fields
+    context = "\n".join(f"{k}: {fields.get(k, '')}" for k in (data.context_fields or fields.keys()))
+    # Call LLM
+    answer, llm_raw = await ask_llm_with_context(data.question, context)
+    qna = IdeaVersionQnA(
+        idea_id=idea_id,
+        version_number=version_number,
+        question=data.question,
+        answer=answer,
+        llm_raw_response=llm_raw
+    )
+    db.add(qna)
+    db.commit()
+    db.refresh(qna)
+    return qna
+
+@router.get("/{idea_id}/versions/{version_number}/qna", response_model=List[IdeaVersionQnAOut])
+def list_idea_version_qna(
+    idea_id: str,
+    version_number: int,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    qnas = db.query(IdeaVersionQnA).filter_by(idea_id=idea_id, version_number=version_number).order_by(IdeaVersionQnA.created_at.asc()).all()
+    return qnas 

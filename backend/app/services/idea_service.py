@@ -1,4 +1,4 @@
-from models import Idea
+from models import Idea, Repo
 import logging
 from app.schemas import IdeaOut
 import os
@@ -11,6 +11,8 @@ import threading
 from llm import generate_deep_dive
 from crud import save_deep_dive
 import asyncio
+from app.services.github import fetch_trending
+from llm import generate_idea_pitches
 
 redis_client = None
 if redis:
@@ -18,6 +20,8 @@ if redis:
         redis_client = redis.Redis.from_url(os.environ.get('REDIS_URL', 'redis://localhost:6379/0'))
     except Exception:
         redis_client = None
+
+logger = logging.getLogger(__name__)
 
 class IdeaService:
     def __init__(self, event_bus):
@@ -128,4 +132,120 @@ class IdeaService:
                 self.logger.error(f"Error in deep dive request: {e}")
                 db.rollback()
             finally:
-                db.close() 
+                db.close()
+
+LANGUAGES = ["Python", "TypeScript", "JavaScript"]
+
+async def seed_system_ideas_if_needed():
+    db = SessionLocal()
+    try:
+        count = db.query(Idea).filter(Idea.user_id == None).count()
+        if count == 0:
+            logger.info("🌱 Seeding system ideas...")
+            # Fetch and save repos for each language
+            for lang in LANGUAGES:
+                logger.info(f"  → Fetching trending repos for {lang}...")
+                repos_data = await fetch_trending(lang)
+                for repo_data in repos_data:
+                    # Check if repo already exists
+                    repo = db.query(Repo).filter(Repo.url == repo_data["url"]).first()
+                    if not repo:
+                        repo = Repo(
+                            name=repo_data["name"],
+                            url=repo_data["url"],
+                            summary=repo_data.get("description", ""),
+                            language=repo_data.get("language", lang)
+                        )
+                        db.add(repo)
+                        db.commit()
+                        db.refresh(repo)
+                    # Generate ideas for this repo
+                    result = await generate_idea_pitches(repo.summary)
+                    raw_blob = result.get('raw')
+                    ideas = result.get('ideas', [])
+                    for idea in ideas:
+                        mvp_effort = idea.get("mvp_effort")
+                        if not isinstance(mvp_effort, int):
+                            mvp_effort = None
+                        score = idea.get("score")
+                        if not isinstance(score, int):
+                            score = None
+                        db.add(Idea(
+                            repo_id=repo.id,
+                            user_id=None,  # System-generated ideas
+                            title=idea.get("title", ""),
+                            hook=idea.get("hook", ""),
+                            value=idea.get("value", ""),
+                            evidence=idea.get("evidence", ""),
+                            differentiator=idea.get("differentiator", ""),
+                            call_to_action=idea.get("call_to_action", ""),
+                            score=score,
+                            mvp_effort=mvp_effort,
+                            llm_raw_response=raw_blob
+                        ))
+                    db.commit()
+            logger.info("✅ System ideas seeded!")
+        else:
+            logger.info(f"✅ {count} system ideas already present. Skipping seeding.")
+    except Exception as e:
+        logger.error(f"Error seeding system ideas: {e}")
+        db.rollback()
+    finally:
+        db.close()
+
+async def seed_user_idea_if_needed(user_id, user_profile):
+    db = SessionLocal()
+    try:
+        count = db.query(Idea).filter(Idea.user_id == user_id).count()
+        if count == 0:
+            logger.info(f"🌱 Seeding first idea for user {user_id}...")
+            # Use profile to generate a personalized idea
+            industry = (user_profile.preferred_industries or [None])[0] or user_profile.industries[0] if user_profile.industries else ""
+            business_model = (user_profile.preferred_business_models or [None])[0] or ""
+            context = user_profile.bio or ""
+            prompt = f"Industry: {industry}\nBusiness Model: {business_model}\nContext: {context}\n"
+            result = await generate_idea_pitches(prompt)
+            raw_blob = result.get('raw')
+            ideas = result.get('ideas', [])
+            if ideas:
+                idea = ideas[0]
+                mvp_effort = idea.get("mvp_effort")
+                if not isinstance(mvp_effort, int):
+                    mvp_effort = None
+                score = idea.get("score")
+                if not isinstance(score, int):
+                    score = None
+                db.add(Idea(
+                    user_id=user_id,
+                    title=idea.get("title", ""),
+                    hook=idea.get("hook", ""),
+                    value=idea.get("value", ""),
+                    evidence=idea.get("evidence", ""),
+                    differentiator=idea.get("differentiator", ""),
+                    call_to_action=idea.get("call_to_action", ""),
+                    score=score,
+                    mvp_effort=mvp_effort,
+                    llm_raw_response=raw_blob,
+                    status='suggested'
+                ))
+                db.commit()
+                logger.info(f"✅ Seeded first idea for user {user_id}")
+            else:
+                logger.warning(f"No ideas generated for user {user_id} profile.")
+        else:
+            logger.info(f"User {user_id} already has {count} ideas. Skipping seeding.")
+    except Exception as e:
+        logger.error(f"Error seeding user idea: {e}")
+        db.rollback()
+    finally:
+        db.close()
+
+async def ask_llm_with_context(question: str, context: str):
+    """Call the LLM with a user question and context, return (answer, raw_response)."""
+    prompt = f"Context:\n{context}\n\nQuestion: {question}\nAnswer:"
+    # Use your LLM call here (e.g., OpenAI, Groq, etc.)
+    # For now, use generate_idea_pitches as a placeholder
+    result = await generate_idea_pitches(prompt)
+    answer = result.get('ideas', [{}])[0].get('value', '') if result.get('ideas') else ''
+    raw = result.get('raw', '')
+    return answer, raw 

@@ -131,6 +131,7 @@ export function IdeaWorkspace({
     // Filter by language
     if (filters.language !== 'all') {
       newFilteredIdeas = newFilteredIdeas.filter(idea => {
+        if (!idea.repo_id) return true; // Always include manual ideas
         const repo = repos.find(r => r.id === idea.repo_id);
         return repo?.language === filters.language;
       });

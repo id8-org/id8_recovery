@@ -24,6 +24,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import logo from '@/assets/logo.png';
+import { toSnakeCase } from '@/lib/utils';
 
 interface OnboardingWizardProps {
   onComplete: () => void;
@@ -167,7 +168,6 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
                 variant="outline"
                 size="sm"
                 onClick={() => toggleArrayItem('skills', skill)}
-                className="justify-start"
               >
                 {`+ ${skill}`}
               </Button>
@@ -193,7 +193,6 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
                 variant="outline"
                 size="sm"
                 onClick={() => toggleArrayItem('industries', industry)}
-                className="justify-start"
               >
                 {`+ ${industry}`}
               </Button>
@@ -223,7 +222,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
         <Button
           type="button"
           variant="outline"
-          className="text-yellow-700 border-yellow-400 hover:bg-yellow-50"
+          size="sm"
           onClick={() => setResumeUploadStatus('skipped')}
         >
           Skip / Continue without Resume (not advised)
@@ -382,7 +381,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 mb-1">
         {SKILLS_OPTIONS.filter(skill => !formData.skills.includes(skill)).map(skill => (
-          <Button key={skill} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('skills', skill)} className="justify-start">{`+ ${skill}`}</Button>
+          <Button key={skill} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('skills', skill)}>{`+ ${skill}`}</Button>
         ))}
       </div>
       <Input value={customIndustry} onChange={e => setCustomIndustry(e.target.value)} placeholder="Add custom skill" className="h-8 text-xs mt-2" />
@@ -404,7 +403,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 mb-1">
         {['Technology', 'Healthcare', 'Education', 'Finance', 'Environment', 'Social Impact', 'Innovation', 'Business', 'Creative Arts', 'Sports', 'Travel', 'Food & Cooking', 'Fitness', 'Gaming', 'Reading', 'Music'].filter(interest => !formData.interests.includes(interest)).map(interest => (
-          <Button key={interest} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('interests', interest)} className="justify-start">{`+ ${interest}`}</Button>
+          <Button key={interest} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('interests', interest)}>{`+ ${interest}`}</Button>
         ))}
       </div>
       <Input value={customIndustry} onChange={e => setCustomIndustry(e.target.value)} placeholder="Add custom interest" className="h-8 text-xs mt-2" />
@@ -426,7 +425,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 mb-1">
         {['Start a side hustle', 'Build a full-time business', 'Learn new skills', 'Network with others', 'Make an impact', 'Achieve financial freedom', 'Solve a problem', 'Innovate', 'Grow a team', 'Other'].filter(goal => !formData.goals.includes(goal)).map(goal => (
-          <Button key={goal} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('goals', goal)} className="justify-start">{`+ ${goal}`}</Button>
+          <Button key={goal} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('goals', goal)}>{`+ ${goal}`}</Button>
         ))}
       </div>
       <Input value={customIndustry} onChange={e => setCustomIndustry(e.target.value)} placeholder="Add custom goal" className="h-8 text-xs mt-2" />
@@ -448,7 +447,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 mb-1">
         {INDUSTRIES_OPTIONS.filter(ind => !formData.preferredIndustries.includes(ind)).map(industry => (
-          <Button key={industry} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('preferredIndustries', industry)} className="justify-start">{`+ ${industry}`}</Button>
+          <Button key={industry} type="button" variant="outline" size="sm" onClick={() => toggleArrayItem('preferredIndustries', industry)}>{`+ ${industry}`}</Button>
         ))}
       </div>
       <Input value={customIndustry} onChange={e => setCustomIndustry(e.target.value)} placeholder="Add custom industry" className="h-8 text-xs" />
@@ -457,7 +456,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
         <Label>Preferred Business Models</Label>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
           {BUSINESS_MODELS.map(model => (
-            <Button key={model} type="button" variant={formData.preferredBusinessModels.includes(model) ? "default" : "outline"} size="sm" onClick={() => toggleArrayItem('preferredBusinessModels', model)} className="justify-start">{formData.preferredBusinessModels.includes(model) && <CheckCircle className="w-4 h-4 mr-2" />}{model}</Button>
+            <Button key={model} type="button" variant={formData.preferredBusinessModels.includes(model) ? "default" : "outline"} size="sm" onClick={() => toggleArrayItem('preferredBusinessModels', model)}>{formData.preferredBusinessModels.includes(model) && <CheckCircle className="w-4 h-4 mr-2" />}{model}</Button>
           ))}
         </div>
       </div>
@@ -552,39 +551,38 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
           } else if (typeof formData.location === 'string') {
             locationToSend = formData.location;
           }
-          await api.post('/auth/onboarding/step1', {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
+          await api.post('/auth/onboarding/step1', toSnakeCase({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
             location: locationToSend,
             industry: formData.industry,
-            years_experience:
-              formData.yearsExperience === "" ? null : Number(formData.yearsExperience),
+            yearsExperience: formData.yearsExperience === "" ? null : Number(formData.yearsExperience),
             bio: formData.bio
-          });
+          }));
           break;
         }
         case 3:
-          await api.post('/auth/onboarding/step2', {
+          await api.post('/auth/onboarding/step2', toSnakeCase({
             skills: formData.skills
-          });
+          }));
           break;
         case 4:
-          await api.post('/auth/onboarding/step3', {
+          await api.post('/auth/onboarding/step3', toSnakeCase({
             interests: formData.interests
-          });
+          }));
           break;
         case 5:
-          await api.post('/auth/onboarding/step4', {
+          await api.post('/auth/onboarding/step4', toSnakeCase({
             goals: formData.goals
-          });
+          }));
           break;
         case 6:
-          await api.post('/auth/onboarding/step5', {
-            preferred_business_models: formData.preferredBusinessModels,
-            preferred_industries: formData.preferredIndustries,
-            risk_tolerance: formData.riskTolerance,
-            time_availability: formData.timeAvailability
-          });
+          await api.post('/auth/onboarding/step5', toSnakeCase({
+            preferredBusinessModels: formData.preferredBusinessModels,
+            preferredIndustries: formData.preferredIndustries,
+            riskTolerance: formData.riskTolerance,
+            timeAvailability: formData.timeAvailability
+          }));
           break;
         case 7:
           setCurrentStep(8);
@@ -600,10 +598,10 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
             setIsLoading(false);
             return;
           }
-          await api.post('/auth/onboarding/complete', {
+          await api.post('/auth/onboarding/complete', toSnakeCase({
             ...formData,
             teamInvites: formData.accountType === 'team' ? formData.teamInvites : [],
-          });
+          }));
           onComplete();
           setIsLoading(false);
           return;

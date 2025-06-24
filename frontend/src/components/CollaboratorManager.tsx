@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from "@/components/ui/use-toast";
@@ -64,6 +64,9 @@ export const CollaboratorManager: React.FC<CollaboratorManagerProps> = ({ idea }
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Manage Collaborators for {idea.title}</DialogTitle>
+          <DialogDescription id="collab-desc">
+            Add, remove, or change roles for collaborators on this idea.
+          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">

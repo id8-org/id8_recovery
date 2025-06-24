@@ -457,3 +457,19 @@ class CommentOut(CommentBase):
 
     class Config:
         from_attributes = True
+
+class IdeaVersionQnACreate(BaseModel):
+    question: str
+    context_fields: Optional[list[str]] = None
+
+class IdeaVersionQnAOut(BaseModel):
+    id: str
+    idea_id: str
+    version_number: int
+    question: str
+    answer: Optional[str] = None
+    llm_raw_response: Optional[str] = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

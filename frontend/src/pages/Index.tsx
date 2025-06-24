@@ -14,7 +14,7 @@ import { IdeaCard } from "@/components/IdeaCard";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { LIFECYCLE_STAGES } from '@/components/IdeaWorkspace';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, DialogDescription } from "@/components/ui/dialog";
 import { IdeaDetailModal } from '@/components/IdeaDetailModal';
 import { useAuth } from '@/contexts/AuthContext';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -115,21 +115,18 @@ const Index = ({ refreshFlag }: { refreshFlag?: number }) => {
 
   const fetchUserIdeas = useCallback(async () => {
     try {
-      const userIdeas = await getAllIdeas();
-      if (userIdeas && Array.isArray(userIdeas)) {
-        // Filter out unparsed/error ideas
-        const validIdeas = userIdeas.filter(idea => 
-          idea && 
-          idea.id && 
-          idea.title && 
-          !idea.title.startsWith('[ERROR]') &&
-          idea.title.trim() !== '' &&
-          idea.title !== 'Error parsing idea'
-        ).map(transformIdea);
-        setAllUserIdeas(validIdeas);
-      } else {
-        setAllUserIdeas([]);
-      }
+      const response = await getAllIdeas();
+      const userIdeas = response.ideas || [];
+      // Filter out unparsed/error ideas
+      const validIdeas = userIdeas.filter(idea => 
+        idea && 
+        idea.id && 
+        idea.title && 
+        !idea.title.startsWith('[ERROR]') &&
+        idea.title.trim() !== '' &&
+        idea.title !== 'Error parsing idea'
+      ).map(transformIdea);
+      setAllUserIdeas(validIdeas);
     } catch (error) {
       console.error("Failed to fetch user ideas:", error);
       toast({
@@ -538,9 +535,12 @@ const Index = ({ refreshFlag }: { refreshFlag?: number }) => {
           fetchUserIdeas();
         }
       }}>
-        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto" aria-describedby="idea-detail-desc">
           <DialogHeader>
             <DialogTitle>Idea Details</DialogTitle>
+            <DialogDescription id="idea-detail-desc">
+              View and manage all details, deep dives, and Q&A for this idea.
+            </DialogDescription>
           </DialogHeader>
           {modalIdea && (
             <IdeaDetailModal
@@ -608,14 +608,16 @@ const Index = ({ refreshFlag }: { refreshFlag?: number }) => {
             )}
             {modalIdea?.status === 'deep_dive' && (
               <Button variant="secondary" onClick={() => {
-                window.location.href = `/ideas/${modalIdea.id}`;
+                setModalIdea(null);
+                navigate(`/ideas/${modalIdea.id}`);
               }}>
                 Iterate
               </Button>
             )}
             {modalIdea && modalIdea.status !== 'suggested' && modalIdea.status !== 'deep_dive' && (
               <Button variant="secondary" onClick={() => {
-                window.location.href = `/ideas/${modalIdea.id}`;
+                setModalIdea(null);
+                navigate(`/ideas/${modalIdea.id}`);
               }}>
                 Edit
               </Button>

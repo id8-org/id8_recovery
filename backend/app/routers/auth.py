@@ -34,6 +34,7 @@ from app.google_auth import authenticate_google_user, authenticate_google_user_w
 import logging
 from app.tiers import get_tier_config, get_account_type_config
 from sqlalchemy.exc import IntegrityError
+from app.services.idea_service import seed_user_idea_if_needed
 
 logger = logging.getLogger(__name__)
 
@@ -98,6 +99,11 @@ async def register(user_data: UserRegister, db: Session = Depends(get_db)):
             db.commit()
         
         logger.info(f"Seeded user {new_user.email} with {len(new_ideas)} ideas.")
+        # Also seed a personalized idea for the user if they have a profile
+        user_profile = getattr(new_user, 'profile', None)
+        if user_profile:
+            import asyncio
+            asyncio.create_task(seed_user_idea_if_needed(new_user.id, user_profile))
 
     except Exception as e:
         logger.error(f"Failed to seed ideas for user {new_user.email}: {e}")

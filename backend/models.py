@@ -309,3 +309,16 @@ class Invite(Base):
     created_at = Column(DateTime, server_default=func.now())
     # Relationships
     team = relationship("Team", back_populates="invites")
+
+class IdeaVersionQnA(Base):
+    __tablename__ = "idea_version_qna"
+    id = Column(String, primary_key=True, default=gen_uuid)
+    idea_id = Column(String, ForeignKey("ideas.id"), nullable=False)
+    version_number = Column(Integer, nullable=False)
+    question = Column(Text, nullable=False)
+    answer = Column(Text, nullable=True)
+    llm_raw_response = Column(Text, nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+
+    # Relationships
+    idea = relationship("Idea")

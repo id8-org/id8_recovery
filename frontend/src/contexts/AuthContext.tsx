@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { api } from '@/lib/api';
+import { toSnakeCase, toCamelCase } from '@/lib/utils';
 
 interface User {
   id: string;
@@ -179,8 +180,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const updateProfile = async (profileData: Partial<UserProfile>) => {
     try {
-      const response = await api.put('/auth/profile', profileData);
-      setUser(prev => prev ? { ...prev, profile: response.data } : null);
+      const response = await api.put('/auth/profile', toSnakeCase(profileData));
+      setUser(prev => prev ? { ...prev, profile: toCamelCase(response.data) } : null);
       // Optionally refresh config if profile update can affect it
       const userResponse = await api.get('/auth/me');
       setConfig(userResponse.data.config || null);
@@ -193,7 +194,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await api.get('/auth/profile');
       setConfig(response.data.config || null);
-      return response.data.profile;
+      return toCamelCase(response.data.profile);
     } catch (error: any) {
       if (error.response?.status === 404) {
         return null;

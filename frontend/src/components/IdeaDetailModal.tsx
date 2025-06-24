@@ -19,6 +19,7 @@ import { CommentSection } from './CommentSection';
 import { DeepDiveVisualizer } from './DeepDiveVisualizer';
 import { getEffortColor } from '../lib/utils';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import IdeaVersionQnA from './IdeaVersionQnA';
 
 interface IdeaDetailModalProps {
   idea: Idea & { deep_dive_versions?: DeepDiveVersion[] };
@@ -237,11 +238,20 @@ export const IdeaDetailModal: React.FC<IdeaDetailModalProps> = ({ idea, repos, o
                 {idea.deep_dive_versions && idea.deep_dive_versions.length > 0 && (
                   <div className="mt-6">
                     <h3 className="text-lg font-semibold mb-2 flex items-center gap-2"><History className="w-5 h-5 text-slate-500" /> Deep Dive Version History</h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-6">
                       {idea.deep_dive_versions.map(version => (
-                        <li key={version.version_number} className="bg-slate-50 rounded p-2 text-xs">
-                          <div className="font-semibold">Version {version.version_number} - {version.created_at ? new Date(version.created_at).toLocaleString() : 'Unknown date'}</div>
-                          <div className="truncate">{version.llm_raw_response?.slice(0, 120) || 'No raw response'}</div>
+                        <li key={version.version_number} className="bg-slate-50 rounded p-4 text-xs">
+                          <div className="font-semibold mb-1">Version {version.version_number} - {version.created_at ? new Date(version.created_at).toLocaleString() : 'Unknown date'}</div>
+                          <div className="truncate mb-2">{version.llm_raw_response?.slice(0, 120) || 'No raw response'}</div>
+                          {/* QnA only for iterating, deep_dive, or closed */}
+                          {['iterating', 'deep_dive', 'closed'].includes(idea.status) && version.fields && (
+                            <IdeaVersionQnA
+                              ideaId={idea.id}
+                              versionNumber={version.version_number}
+                              fields={version.fields.sections ? Object.fromEntries(version.fields.sections.map(s => [s.title, s.content])) : {}}
+                              disabled={false}
+                            />
+                          )}
                         </li>
                       ))}
                     </ul>
