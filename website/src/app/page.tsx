@@ -1,15 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
-
-// Try/catch for Next.js Image import
-let ImageComponent: any;
-try {
-  // @ts-ignore
-  ImageComponent = require('next/image').default;
-} catch {
-  ImageComponent = (props: any) => <img {...props} />;
-}
+import Image from "next/image";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -49,7 +41,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="w-full flex flex-col items-center justify-center py-24 px-4 bg-gradient-to-b from-blue-100 to-white relative overflow-hidden">
         <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="flex flex-col items-center max-w-2xl mx-auto text-center z-10">
-          <ImageComponent src="/assets/logo.png" alt="ID8 logo" width={80} height={80} className="mb-4" />
+          <Image src="/assets/logo.png" alt="ID8 logo" width={80} height={80} className="mb-4" />
           <h1 className="text-5xl md:text-6xl font-extrabold text-blue-900 mb-6 leading-tight drop-shadow">Unlock Your Next Big Idea with ID8</h1>
           <p className="text-xl md:text-2xl text-slate-700 mb-10">AI-powered idea generation, validation, and deep dives for founders, makers, and innovators. Discover, refine, and launch your next venture—faster than ever.</p>
           <a
@@ -196,7 +188,7 @@ export default function Home() {
             }
           ].map((t, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i, duration: 0.5 }} className="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow border border-blue-100">
-              <ImageComponent src={t.avatar} alt={t.name} width={48} height={48} className="rounded-full mb-3" />
+              <Image src={t.avatar} alt={t.name} width={48} height={48} className="rounded-full mb-3" />
               <p className="italic text-slate-700 mb-2">&ldquo;{t.quote}&rdquo;</p>
               <span className="font-semibold text-blue-900">{t.name}</span>
             </motion.div>
@@ -281,7 +273,7 @@ export default function Home() {
       <footer className="py-8 px-4 bg-blue-900 text-white text-center mt-auto">
         <div className="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto gap-4">
           <div className="flex items-center gap-2 justify-center">
-            <ImageComponent src="/assets/logo.png" alt="ID8 logo" width={32} height={32} />
+            <Image src="/assets/logo.png" alt="ID8 logo" width={32} height={32} />
             <span className="font-bold text-lg">ID8</span>
           </div>
           <div className="flex gap-4 justify-center">

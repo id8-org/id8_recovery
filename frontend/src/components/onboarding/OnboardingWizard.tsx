@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import logo from '@/assets/logo.png';
 
 interface OnboardingWizardProps {
   onComplete: () => void;
@@ -643,55 +644,44 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }
     }
   };
 
-  let logoSrc: string;
-  try {
-    logoSrc = require('@/assets/logo.png');
-  } catch {
-    logoSrc = 'https://placehold.co/120x40?text=ID8';
-  }
-
   return (
-    <div>
-      <img src={logoSrc} alt="App Logo" className="mx-auto mb-4" style={{ maxWidth: '120px' }} />
-      <Card className="w-full max-w-2xl mx-auto">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold text-center">Onboarding</CardTitle>
-          <CardDescription className="text-center">Let's get to know you and personalize your experience.</CardDescription>
-        </CardHeader>
-        <CardContent style={{ minHeight: '480px' }}>
-          {renderCurrentStep()}
-          
-          <div className="flex justify-between mt-8">
-            <Button
-              variant="outline"
-              onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
-              disabled={currentStep === 1 || isLoading}
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Previous
-            </Button>
-            
-            <Button
-              onClick={handleStepSubmit}
-              disabled={!canProceed() || isLoading}
-            >
-              {isLoading ? (
-                "Saving..."
-              ) : currentStep === totalSteps ? (
-                <>
-                  Complete Setup
-                  <CheckCircle className="w-4 h-4 ml-2" />
-                </>
-              ) : (
-                <>
-                  Next
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </>
-              )}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+    <div className="max-w-2xl mx-auto py-8 px-4">
+      <div className="flex flex-col items-center mb-6">
+        <img src={logo} alt="ID8 Logo" className="w-16 h-16 mb-2" />
+        <h2 className="text-2xl font-bold text-blue-900 mb-2">Welcome to ID8</h2>
+      </div>
+      <Progress value={progress} className="mb-6" />
+      {renderCurrentStep()}
+      
+      <div className="flex justify-between mt-8">
+        <Button
+          variant="outline"
+          onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
+          disabled={currentStep === 1 || isLoading}
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Previous
+        </Button>
+        
+        <Button
+          onClick={handleStepSubmit}
+          disabled={!canProceed() || isLoading}
+        >
+          {isLoading ? (
+            "Saving..."
+          ) : currentStep === totalSteps ? (
+            <>
+              Complete Setup
+              <CheckCircle className="w-4 h-4 ml-2" />
+            </>
+          ) : (
+            <>
+              Next
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </>
+          )}
+        </Button>
+      </div>
     </div>
   );
 }; 
