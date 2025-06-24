@@ -4352,3 +4352,22 @@ You are an experienced entrepreneur and technologist with expertise in:
 2025-06-24 12:23:11 - llm - ERROR - 🔍 DEBUG: First 200 chars of content: {
   "Product": "RAGFlow, a smart contact lens that monitors glucose levels in real-time, providing non-invasive and continuous glucose monitoring for diabetics.",
   "Timing": "Now is the perfect time ...
+2025-06-24 12:55:44 - llm - ERROR - 🔍 DEBUG: call_groq called with model=llama3-70b-8192
+2025-06-24 12:55:44 - llm - ERROR - 🔍 DEBUG: Prompt length: 4239 characters
+2025-06-24 12:55:44 - llm - ERROR - 🔍 DEBUG: First 200 chars of prompt: 
+You are an experienced entrepreneur and technologist with expertise in:
+- Product development and MVP creation
+- Business strategy and market analysis
+- Technology implementation and scaling
+- User r...
+2025-06-24 12:55:44 - llm - ERROR - 🔍 DEBUG: Call stack - this is call_groq entry point
+2025-06-24 12:55:44 - llm - ERROR - 🔍 DEBUG: Attempt 1 - Making request to Groq API with key index 0...
+2025-06-24 12:55:44 - llm - ERROR - 🔍 DEBUG: Response status: 401
+2025-06-24 12:55:44 - llm - ERROR - 🔍 DEBUG: Response headers: {'date': 'Tue, 24 Jun 2025 12:55:44 GMT', 'content-type': 'application/json', 'content-length': '96', 'connection': 'keep-alive', 'cache-control': 'private, max-age=0, no-store, no-cache, must-revalidate', 'vary': 'Origin', 'x-groq-region': 'us-central-1', 'x-request-id': 'req_01jyh04ebsf5d91wyebn07havd', 'cf-cache-status': 'DYNAMIC', 'set-cookie': '__cf_bm=yrEMID_NtKVTA0ARJRQ9WFTzWKoAhivkVH983Pgak4o-1750769744-1.0.1.1-xtY2UmyxA5lMnxagyMtY46URzNy_G64AC02SxTIa8H_YO_F285StfKD6siqoXDugjEQIsey9PpR3zkKHUTc1MtRKp0VOqED70jBuQhoDh_U; path=/; expires=Tue, 24-Jun-25 13:25:44 GMT; domain=.groq.com; HttpOnly; Secure; SameSite=None', 'server': 'cloudflare', 'cf-ray': '954c61954f1f8f87-BOS', 'alt-svc': 'h3=":443"; ma=86400'}
+2025-06-24 12:55:44 - llm - ERROR - ❌ ERROR in call_groq (non-retryable): Client error '401 Unauthorized' for url 'https://api.groq.com/openai/v1/chat/completions'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-06-24 12:55:44 - llm - ERROR - ❌ ERROR type: <class 'httpx.HTTPStatusError'>
+2025-06-24 12:55:44 - llm - ERROR - 🔍 [DeepDive] Error generating deep dive: Client error '401 Unauthorized' for url 'https://api.groq.com/openai/v1/chat/completions'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-06-24 12:55:44 - llm - ERROR - 🔍 [DeepDive] Exception type: <class 'httpx.HTTPStatusError'>
+2025-06-24 12:55:44 - llm - ERROR - 🔍 [DeepDive] LLM response that caused error: None
