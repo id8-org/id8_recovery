@@ -499,32 +499,28 @@ const Profile = () => {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    {user.profile?.bio && (
-                      <div>
-                        <Label className="text-sm font-medium text-slate-700">Bio</Label>
-                        <p className="text-slate-600 mt-1">{user.profile.bio}</p>
-                      </div>
-                    )}
-                    {user.profile?.experience_years && (
-                      <div className="flex items-center gap-2">
-                        <Briefcase className="h-4 w-4 text-slate-500" />
-                        <span className="text-sm text-slate-600">
-                          {user.profile.experience_years} years of experience
-                        </span>
-                      </div>
-                    )}
+                    <div>
+                      <Label className="text-sm font-medium text-slate-700">Bio</Label>
+                      <p className="text-slate-600 mt-1">{user.profile?.bio || <span className="italic text-slate-400">Not set</span>}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Briefcase className="h-4 w-4 text-slate-500" />
+                      <span className="text-sm text-slate-600">
+                        {user.profile?.experience_years ? `${user.profile.experience_years} years of experience` : <span className="italic text-slate-400">Not set</span>}
+                      </span>
+                    </div>
                   </div>
                 )}
               </CardContent>
             </Card>
 
             {/* Skills */}
-            {user.profile?.skills && user.profile.skills.length > 0 && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Skills</CardTitle>
-                </CardHeader>
-                <CardContent>
+            <Card>
+              <CardHeader>
+                <CardTitle>Skills</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {user.profile?.skills && user.profile.skills.length > 0 ? (
                   <div className="flex flex-wrap gap-2">
                     {user.profile.skills.map((skill, index) => (
                       <Badge key={index} variant="secondary">
@@ -532,17 +528,19 @@ const Profile = () => {
                       </Badge>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
-            )}
+                ) : (
+                  <span className="italic text-slate-400">No skills added yet</span>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Interests */}
-            {user.profile?.interests && user.profile.interests.length > 0 && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Interests</CardTitle>
-                </CardHeader>
-                <CardContent>
+            <Card>
+              <CardHeader>
+                <CardTitle>Interests</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {user.profile?.interests && user.profile.interests.length > 0 ? (
                   <div className="flex flex-wrap gap-2">
                     {user.profile.interests.map((interest, index) => (
                       <Badge key={index} variant="outline">
@@ -550,20 +548,22 @@ const Profile = () => {
                       </Badge>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
-            )}
+                ) : (
+                  <span className="italic text-slate-400">No interests added yet</span>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Goals */}
-            {user.profile?.goals && user.profile.goals.length > 0 && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Target className="h-5 w-5" />
-                    Goals
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Target className="h-5 w-5" />
+                  Goals
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {user.profile?.goals && user.profile.goals.length > 0 ? (
                   <div className="space-y-2">
                     {user.profile.goals.map((goal, index) => (
                       <div key={index} className="flex items-center gap-2">
@@ -572,66 +572,63 @@ const Profile = () => {
                       </div>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
-            )}
+                ) : (
+                  <span className="italic text-slate-400">No goals added yet</span>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Preferences */}
-            {(user.profile?.preferred_business_models?.length > 0 || 
-              user.profile?.preferred_industries?.length > 0 || 
-              user.profile?.risk_tolerance || 
-              user.profile?.time_availability) && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Clock className="h-5 w-5" />
-                    Preferences
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {user.profile.preferred_business_models?.length > 0 && (
-                    <div>
-                      <Label className="text-sm font-medium text-slate-700">Preferred Business Models</Label>
-                      <div className="flex flex-wrap gap-2 mt-1">
-                        {user.profile.preferred_business_models.map((model, index) => (
-                          <Badge key={index} variant="secondary">
-                            {model}
-                          </Badge>
-                        ))}
-                      </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Clock className="h-5 w-5" />
+                  Preferences
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {user.profile?.preferred_business_models?.length > 0 && (
+                  <div>
+                    <Label className="text-sm font-medium text-slate-700">Preferred Business Models</Label>
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {user.profile.preferred_business_models.map((model, index) => (
+                        <Badge key={index} variant="secondary">
+                          {model}
+                        </Badge>
+                      ))}
                     </div>
-                  )}
-                  {user.profile.preferred_industries?.length > 0 && (
-                    <div>
-                      <Label className="text-sm font-medium text-slate-700">Preferred Industries</Label>
-                      <div className="flex flex-wrap gap-2 mt-1">
-                        {user.profile.preferred_industries.map((industry, index) => (
-                          <Badge key={index} variant="outline">
-                            {industry}
-                          </Badge>
-                        ))}
-                      </div>
+                  </div>
+                )}
+                {user.profile?.preferred_industries?.length > 0 && (
+                  <div>
+                    <Label className="text-sm font-medium text-slate-700">Preferred Industries</Label>
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {user.profile.preferred_industries.map((industry, index) => (
+                        <Badge key={index} variant="outline">
+                          {industry}
+                        </Badge>
+                      ))}
                     </div>
-                  )}
-                  {user.profile.risk_tolerance && (
-                    <div>
-                      <Label className="text-sm font-medium text-slate-700">Risk Tolerance</Label>
-                      <Badge variant="secondary" className="mt-1">
-                        {user.profile.risk_tolerance}
-                      </Badge>
-                    </div>
-                  )}
-                  {user.profile.time_availability && (
-                    <div>
-                      <Label className="text-sm font-medium text-slate-700">Time Availability</Label>
-                      <Badge variant="secondary" className="mt-1">
-                        {user.profile.time_availability}
-                      </Badge>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            )}
+                  </div>
+                )}
+                {user.profile?.risk_tolerance && (
+                  <div>
+                    <Label className="text-sm font-medium text-slate-700">Risk Tolerance</Label>
+                    <Badge variant="secondary" className="mt-1">
+                      {user.profile.risk_tolerance}
+                    </Badge>
+                  </div>
+                )}
+                {user.profile?.time_availability && (
+                  <div>
+                    <Label className="text-sm font-medium text-slate-700">Time Availability</Label>
+                    <Badge variant="secondary" className="mt-1">
+                      {user.profile.time_availability}
+                    </Badge>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
 
             {isEditing && (
               <Card className="mb-4">

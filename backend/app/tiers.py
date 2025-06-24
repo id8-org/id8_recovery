@@ -3,7 +3,7 @@
 
 TIERS = {
     "free": {
-        "max_ideas": 10,
+        "max_ideas": 50,
         "deep_dive": False,
         "market_snapshot": False,
         "lenses": False,
