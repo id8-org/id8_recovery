@@ -62,6 +62,7 @@ import { IdeaFilterBar } from '@/components/IdeaFilterBar';
 import { IdeaWorkspace } from '@/components/IdeaWorkspace';
 import { IdeaDetailModal } from '@/components/IdeaDetailModal';
 import { useAuth } from '@/contexts/AuthContext';
+import IdeaVersionQnA from '@/components/IdeaVersionQnA';
 
 export default function IdeaPage() {
   const { id } = useParams<{ id: string }>();
@@ -409,7 +410,17 @@ export default function IdeaPage() {
             <ArrowLeft className="w-4 h-4 mr-1 inline-block" /> Back
           </Button>
           <h1 className="text-3xl font-bold text-blue-900 mb-2">
-            {idea.title}
+            {isEditing ? (
+              <input
+                className="text-3xl font-bold text-blue-900 bg-slate-50 border-b border-blue-200 focus:outline-none focus:border-blue-500 w-full mb-2"
+                value={editData.title}
+                onChange={e => setEditData({ ...editData, title: e.target.value })}
+                placeholder="Idea Title"
+                disabled={loading}
+              />
+            ) : (
+              idea.title
+            )}
           </h1>
           <div className="flex items-center gap-2 mb-4">
             <Badge variant="secondary">{idea.status.toUpperCase()}</Badge>
@@ -429,33 +440,76 @@ export default function IdeaPage() {
             </TabsList>
             {/* Overview Tab */}
             <TabsContent value="overview">
-              <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Elevator Pitch</h3>
-                  {idea.hook && <div className="mb-2"><span className="font-semibold">Hook:</span> {idea.hook}</div>}
-                  {idea.value && <div className="mb-2"><span className="font-semibold">Value:</span> {idea.value}</div>}
-                  {idea.evidence && <div className="mb-2"><span className="font-semibold">Evidence:</span> {idea.evidence}</div>}
-                  {idea.differentiator && <div className="mb-2"><span className="font-semibold">Differentiator:</span> {idea.differentiator}</div>}
-                  {idea.call_to_action && <div className="mb-2"><span className="font-semibold">Call to Action:</span> {idea.call_to_action}</div>}
+              {isEditing ? (
+                <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label>Hook</Label>
+                    <Textarea value={editData.hook} onChange={e => setEditData({ ...editData, hook: e.target.value })} rows={2} />
+                    <Label>Value</Label>
+                    <Textarea value={editData.value} onChange={e => setEditData({ ...editData, value: e.target.value })} rows={2} />
+                    <Label>Evidence</Label>
+                    <Textarea value={editData.evidence} onChange={e => setEditData({ ...editData, evidence: e.target.value })} rows={2} />
+                    <Label>Differentiator</Label>
+                    <Textarea value={editData.differentiator} onChange={e => setEditData({ ...editData, differentiator: e.target.value })} rows={2} />
+                    <Label>Call to Action</Label>
+                    <Textarea value={editData.call_to_action} onChange={e => setEditData({ ...editData, call_to_action: e.target.value })} rows={2} />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Business Model</Label>
+                    <Textarea value={editData.business_model} onChange={e => setEditData({ ...editData, business_model: e.target.value })} rows={2} />
+                    <Label>Market Positioning</Label>
+                    <Textarea value={editData.market_positioning} onChange={e => setEditData({ ...editData, market_positioning: e.target.value })} rows={2} />
+                    <Label>Revenue Streams</Label>
+                    <Textarea value={editData.revenue_streams} onChange={e => setEditData({ ...editData, revenue_streams: e.target.value })} rows={2} />
+                    <Label>Target Audience</Label>
+                    <Textarea value={editData.target_audience} onChange={e => setEditData({ ...editData, target_audience: e.target.value })} rows={2} />
+                    <Label>Competitive Advantage</Label>
+                    <Textarea value={editData.competitive_advantage} onChange={e => setEditData({ ...editData, competitive_advantage: e.target.value })} rows={2} />
+                    <Label>Go to Market Strategy</Label>
+                    <Textarea value={editData.go_to_market_strategy} onChange={e => setEditData({ ...editData, go_to_market_strategy: e.target.value })} rows={2} />
+                    <Label>Success Metrics</Label>
+                    <Textarea value={editData.success_metrics} onChange={e => setEditData({ ...editData, success_metrics: e.target.value })} rows={2} />
+                    <Label>Risk Factors</Label>
+                    <Textarea value={editData.risk_factors} onChange={e => setEditData({ ...editData, risk_factors: e.target.value })} rows={2} />
+                    <Label>Iteration Notes</Label>
+                    <Textarea value={editData.iteration_notes} onChange={e => setEditData({ ...editData, iteration_notes: e.target.value })} rows={2} />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Repository</h3>
-                  {repo ? (
-                    <>
-                      <div className="mb-1"><span className="font-semibold">Name:</span> {repo.name}</div>
-                      <div className="mb-1"><span className="font-semibold">Language:</span> {repo.language}</div>
-                      <div className="mb-1"><span className="font-semibold">Stars:</span> {repo.stargazers_count}</div>
-                      <div className="mb-1"><span className="font-semibold">Forks:</span> {repo.forks_count}</div>
-                      <div className="mb-1"><span className="font-semibold">Watchers:</span> {repo.watchers_count}</div>
-                      <div className="mb-1"><span className="font-semibold">Summary:</span> {repo.summary}</div>
-                      <div className="mb-1"><span className="font-semibold">URL:</span> <a href={repo.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">{repo.url}</a></div>
-                    </>
-                  ) : <div className="text-slate-500 italic">No repository info</div>}
+              ) : (
+                <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Elevator Pitch</h3>
+                    {idea.hook && <div className="mb-2"><span className="font-semibold">Hook:</span> {idea.hook}</div>}
+                    {idea.value && <div className="mb-2"><span className="font-semibold">Value:</span> {idea.value}</div>}
+                    {idea.evidence && <div className="mb-2"><span className="font-semibold">Evidence:</span> {idea.evidence}</div>}
+                    {idea.differentiator && <div className="mb-2"><span className="font-semibold">Differentiator:</span> {idea.differentiator}</div>}
+                    {idea.call_to_action && <div className="mb-2"><span className="font-semibold">Call to Action:</span> {idea.call_to_action}</div>}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Repository</h3>
+                    {repo ? (
+                      <>
+                        <div className="mb-1"><span className="font-semibold">Name:</span> {repo.name}</div>
+                        <div className="mb-1"><span className="font-semibold">Language:</span> {repo.language}</div>
+                        <div className="mb-1"><span className="font-semibold">Stars:</span> {repo.stargazers_count}</div>
+                        <div className="mb-1"><span className="font-semibold">Forks:</span> {repo.forks_count}</div>
+                        <div className="mb-1"><span className="font-semibold">Watchers:</span> {repo.watchers_count}</div>
+                        <div className="mb-1"><span className="font-semibold">Summary:</span> {repo.summary}</div>
+                        <div className="mb-1"><span className="font-semibold">URL:</span> <a href={repo.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">{repo.url}</a></div>
+                      </>
+                    ) : <div className="text-slate-500 italic">No repository info</div>}
+                  </div>
                 </div>
-              </div>
-              <div className="my-6" data-tour="collaboration">
-                <h3 className="text-lg font-semibold mb-2">Collaboration Zone</h3>
-                {/* <ChangeProposalList idea={idea} /> */}
+              )}
+              <div className="flex gap-2 mt-4">
+                {isEditing ? (
+                  <>
+                    <Button variant="outline" onClick={() => setIsEditing(false)} disabled={loading}>Cancel</Button>
+                    <Button variant="default" onClick={handleSaveEdit} disabled={loading}>Save</Button>
+                  </>
+                ) : (
+                  <Button variant="secondary" onClick={() => setIsEditing(true)} disabled={loading}>Edit</Button>
+                )}
               </div>
             </TabsContent>
             {/* Deep Dive Tab */}
@@ -506,15 +560,24 @@ export default function IdeaPage() {
                       </div>
                     )}
                   </div>
-                  {/* Deep Dive Version History */}
+                  {/* Deep Dive Version History & QnA */}
                   {deepDiveVersions && deepDiveVersions.length > 0 && (
                     <div className="mt-6">
                       <h3 className="text-lg font-semibold mb-2 flex items-center gap-2"><History className="w-5 h-5 text-slate-500" /> Deep Dive Version History</h3>
-                      <ul className="space-y-2">
+                      <ul className="space-y-6">
                         {deepDiveVersions.map(version => (
-                          <li key={version.version_number} className="bg-slate-50 rounded p-2 text-xs">
-                            <div className="font-semibold">Version {version.version_number} - {version.created_at ? new Date(version.created_at).toLocaleString() : 'Unknown date'}</div>
-                            <div className="truncate">{version.llm_raw_response?.slice(0, 120) || 'No raw response'}</div>
+                          <li key={version.version_number} className="bg-slate-50 rounded p-4 text-xs">
+                            <div className="font-semibold mb-1">Version {version.version_number} - {version.created_at ? new Date(version.created_at).toLocaleString() : 'Unknown date'}</div>
+                            <div className="truncate mb-2">{version.llm_raw_response?.slice(0, 120) || 'No raw response'}</div>
+                            {/* QnA only for iterating, deep_dive, or closed */}
+                            {['iterating', 'deep_dive', 'closed'].includes(idea.status) && version.fields && (
+                              <IdeaVersionQnA
+                                ideaId={idea.id}
+                                versionNumber={version.version_number}
+                                fields={version.fields.sections ? Object.fromEntries(version.fields.sections.map(s => [s.title, s.content])) : {}}
+                                disabled={false}
+                              />
+                            )}
                           </li>
                         ))}
                       </ul>

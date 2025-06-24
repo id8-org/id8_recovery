@@ -485,9 +485,12 @@ const Index = ({ refreshFlag }: { refreshFlag?: number }) => {
         <AddIdeaModal
           isOpen={isAddIdeaModalOpen}
           onClose={() => setAddIdeaModalOpen(false)}
-          onIdeaCreated={() => {
+          onIdeaCreated={(ideaId?: string) => {
             fetchUserIdeas();
             fetchAllIdeas(currentRepos);
+            if (ideaId) {
+              // Optionally, navigate(`/ideas/${ideaId}`); // Uncomment to auto-navigate
+            }
           }}
         />
 

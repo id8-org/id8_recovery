@@ -13,7 +13,7 @@ const BUSINESS_MODELS = ["SaaS", "Marketplace", "E-commerce", "API as a Service"
 interface AddIdeaModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onIdeaCreated: () => void;
+  onIdeaCreated: (ideaId?: string) => void;
 }
 
 export const AddIdeaModal = ({ isOpen, onClose, onIdeaCreated }: AddIdeaModalProps) => {
@@ -84,15 +84,22 @@ export const AddIdeaModal = ({ isOpen, onClose, onIdeaCreated }: AddIdeaModalPro
     setLoading(true);
     try {
       // The validation endpoint actually creates an idea, so it works perfectly here.
-      await api.post('/ideas/validate', {
+      const res = await api.post('/ideas/validate', {
         idea_data: userIdea,
         use_personalization: usePersonalization,
       });
+      const newIdeaId = res.data?.id;
       toast({
         title: "Idea Created!",
-        description: "Your new idea has been added to your workspace for analysis.",
+        description: (
+          <span>
+            Your new idea has been added to your workspace for analysis. {newIdeaId && (
+              <a href={`/ideas/${newIdeaId}`} className="text-blue-600 underline ml-2">View Idea</a>
+            )}
+          </span>
+        ),
       });
-      onIdeaCreated();
+      onIdeaCreated(newIdeaId);
       onClose();
     } catch (error) {
       toast({

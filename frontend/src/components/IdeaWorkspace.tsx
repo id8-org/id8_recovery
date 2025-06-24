@@ -100,6 +100,8 @@ export function IdeaWorkspace({
 
   const [deepDiveInProgress, setDeepDiveInProgress] = useState<string | null>(null);
 
+  const [modalLoading, setModalLoading] = useState(false);
+
   // Load seen ideas from localStorage
   useEffect(() => {
     const savedSeenIdeas = localStorage.getItem('seenIdeas');
@@ -620,9 +622,17 @@ export function IdeaWorkspace({
   }
 
   // When a card is clicked, open the modal
-  const handleCardClick = (idea: Idea) => {
+  const handleCardClick = async (idea: Idea) => {
     markIdeaAsSeen(idea.id);
-    setModalIdea(idea);
+    setModalLoading(true);
+    try {
+      const freshIdea = await getIdeaById(idea.id);
+      setModalIdea(freshIdea);
+    } catch (error) {
+      setModalIdea(idea); // fallback to stale idea if fetch fails
+    } finally {
+      setModalLoading(false);
+    }
   };
 
   // Helper function to determine required tasks based on status transition
@@ -806,12 +816,12 @@ export function IdeaWorkspace({
                                       <button
                                         className="text-blue-700 hover:underline font-semibold text-sm truncate text-left bg-transparent border-none p-0 m-0 cursor-pointer"
                                         style={{ maxWidth: '140px', appearance: 'none' }}
-                                        onClick={e => {
+                                        onClick={async e => {
                                           e.stopPropagation();
                                           if (idea.deepDiveStatus === 'loading') {
                                             return;
                                           }
-                                          setModalIdea(idea);
+                                          await handleCardClick(idea);
                                         }}
                                         title={idea.title}
                                       >
@@ -831,6 +841,11 @@ export function IdeaWorkspace({
                                     <div className="text-xs text-gray-700 line-clamp-3 whitespace-pre-line flex-1 min-h-[2.5em]">
                                       {idea.hook || 'No elevator pitch.'}
                                     </div>
+                                    {modalLoading && modalIdea?.id === idea.id && (
+                                      <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-70 z-20">
+                                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+                                      </div>
+                                    )}
                                   </div>
                                 );
                               }}

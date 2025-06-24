@@ -203,16 +203,22 @@ const AppRoutes = ({ refreshFlag }) => {
     console.log('Rendering main app routes');
     return (
       <Routes>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
             <ProtectedRoute>
               <Index refreshFlag={refreshFlag} />
             </ProtectedRoute>
-          } 
-        >
-          <Route path="ideas/:id" element={<IdeaPage />} />
-        </Route>
+          }
+        />
+        <Route
+          path="/ideas/:id"
+          element={
+            <ProtectedRoute>
+              <IdeaPage />
+            </ProtectedRoute>
+          }
+        />
         <Route 
           path="/profile" 
           element={
