@@ -569,8 +569,8 @@ export default function IdeaPage() {
                           <li key={version.version_number} className="bg-slate-50 rounded p-4 text-xs">
                             <div className="font-semibold mb-1">Version {version.version_number} - {version.created_at ? new Date(version.created_at).toLocaleString() : 'Unknown date'}</div>
                             <div className="truncate mb-2">{version.llm_raw_response?.slice(0, 120) || 'No raw response'}</div>
-                            {/* QnA only for iterating, deep_dive, or closed */}
-                            {['iterating', 'deep_dive', 'closed'].includes(idea.status) && version.fields && (
+                            {/* QnA only for iterating, deep_dive, considering, or closed */}
+                            {['iterating', 'deep_dive', 'considering', 'closed'].includes(idea.status) && version.fields && (
                               <IdeaVersionQnA
                                 ideaId={idea.id}
                                 versionNumber={version.version_number}
