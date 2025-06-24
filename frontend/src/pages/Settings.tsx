@@ -62,6 +62,12 @@ const Settings = () => {
                 <p className="text-sm text-slate-600">
                   <strong>Account Status:</strong> {user.is_verified ? 'Verified' : 'Unverified'}
                 </p>
+                <p className="text-sm text-slate-600">
+                  <strong>Tier:</strong> <span className={`inline-block px-2 py-1 rounded text-xs font-semibold ${user.tier === 'premium' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600'}`}>{user.tier ? user.tier.charAt(0).toUpperCase() + user.tier.slice(1) : 'Free'}</span>
+                </p>
+                <p className="text-sm text-slate-600">
+                  <strong>Account Type:</strong> <span className={`inline-block px-2 py-1 rounded text-xs font-semibold ${user.account_type === 'team' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'}`}>{user.account_type ? user.account_type.charAt(0).toUpperCase() + user.account_type.slice(1) : 'Solo'}</span>
+                </p>
               </div>
             </CardContent>
           </Card>

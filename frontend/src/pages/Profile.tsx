@@ -203,6 +203,14 @@ const Profile = () => {
                     </a>
                   </div>
                 )}
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <span>Tier:</span>
+                  <Badge variant={user.tier === 'premium' ? 'default' : 'secondary'}>{user.tier ? user.tier.charAt(0).toUpperCase() + user.tier.slice(1) : 'Free'}</Badge>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <span>Account Type:</span>
+                  <Badge variant={user.account_type === 'team' ? 'default' : 'secondary'}>{user.account_type ? user.account_type.charAt(0).toUpperCase() + user.account_type.slice(1) : 'Solo'}</Badge>
+                </div>
               </CardContent>
             </Card>
           </div>
