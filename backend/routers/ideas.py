@@ -27,14 +27,14 @@ async def trigger_deepdive(idea_id: str, db: Session = Depends(get_db)):
     if not idea:
         raise HTTPException(status_code=404, detail="Idea not found")
     
-    logger.error(f"🔍 DEBUG: trigger_deepdive called for idea {idea_id}")
-    logger.error(f"🔍 DEBUG: Found idea: {idea.title}")
-    logger.error(f"🔍 DEBUG: idea.deep_dive exists: {bool(idea.deep_dive)}")
-    logger.error(f"🔍 DEBUG: idea.deep_dive_requested: {idea.deep_dive_requested}")
+    logger.debug(f"trigger_deepdive called for idea {idea_id}")
+    logger.debug(f"Found idea: {idea.title}")
+    logger.debug(f"idea.deep_dive exists: {bool(idea.deep_dive)}")
+    logger.debug(f"idea.deep_dive_requested: {idea.deep_dive_requested}")
     
     # Check if deep dive already exists and is not being re-requested
     if idea.deep_dive and not idea.deep_dive_requested:
-        logger.error(f"🔍 DEBUG: Returning cached deep dive")
+        logger.info(f"Returning cached deep dive for idea {idea_id}")
         return {"status": "completed", "deep_dive": idea.deep_dive}
     
     # Mark as requested

@@ -38,12 +38,12 @@ def get_or_create_repo(db: Session, repo_data: dict):
             for k, v in repo_data.items():
                 if hasattr(repo, k):
                     setattr(repo, k, v)
-            logger.debug(f"Updated existing repo: {repo.name}")
+            logger.info(f"Updated existing repo: {repo.name}")
         else:
             # Create new repo
             repo = Repo(**repo_data)
             db.add(repo)
-            logger.debug(f"Created new repo: {repo.name}")
+            logger.info(f"Created new repo: {repo.name}")
         return repo
     except Exception as e:
         logger.error(f"Error in get_or_create_repo: {e}")
@@ -74,7 +74,7 @@ def get_ideas_for_repo(db: Session, repo_id: str):
                 logger.debug(f"Cache hit for {cache_key}")
                 return [IdeaOut.model_validate(i) for i in json.loads(cached)]
         ideas = db.query(Idea).filter(Idea.repo_id == repo_id).all()
-        logger.debug(f"Found {len(ideas)} ideas for repo {repo_id}")
+        logger.info(f"Found {len(ideas)} ideas for repo {repo_id}")
         if redis_client:
             def default_serializer(obj):
                 if isinstance(obj, datetime):

@@ -50,4 +50,5 @@ def setup_error_handlers(app):
     app.add_exception_handler(HTTPException, http_exception_handler)
     app.add_exception_handler(StarletteHTTPException, http_exception_handler)
     app.add_exception_handler(RequestValidationError, validation_exception_handler)
-    app.add_exception_handler(Exception, general_exception_handler) 
+    app.add_exception_handler(Exception, general_exception_handler)
+    logger.info("Error handlers set up successfully.") 

@@ -35,10 +35,10 @@ def _get_next_groq_key():
 
 async def call_groq(prompt: str, model: str = "llama3-8b-8192"):
     """Call Groq API with the given prompt, with retries, round robin keys, and longer timeout."""
-    logger.error(f"🔍 DEBUG: call_groq called with model={model}")
-    logger.error(f"🔍 DEBUG: Prompt length: {len(prompt)} characters")
-    logger.error(f"🔍 DEBUG: First 200 chars of prompt: {prompt[:200]}...")
-    logger.error(f"🔍 DEBUG: Call stack - this is call_groq entry point")
+    logger.info(f"Calling Groq API with model={model}")
+    logger.debug(f"Prompt length: {len(prompt)} characters")
+    logger.debug(f"First 200 chars of prompt: {prompt[:200]}...")
+    logger.debug("Call stack - this is call_groq entry point")
 
     max_retries = 3
     for attempt in range(1, max_retries + 1):
@@ -46,7 +46,7 @@ async def call_groq(prompt: str, model: str = "llama3-8b-8192"):
             groq_key = _get_next_groq_key()
         try:
             async with httpx.AsyncClient(timeout=60.0) as client:
-                logger.error(f"🔍 DEBUG: Attempt {attempt} - Making request to Groq API with key index {(_groq_key_counter-1)%len(GROQ_API_KEYS)}...")
+                logger.info(f"Attempt {attempt} - Making request to Groq API with key index {(_groq_key_counter-1)%len(GROQ_API_KEYS)}...")
                 response = await client.post(
                     "https://api.groq.com/openai/v1/chat/completions",
                     json={
@@ -57,32 +57,32 @@ async def call_groq(prompt: str, model: str = "llama3-8b-8192"):
                     },
                     headers={"Authorization": f"Bearer {groq_key}"}
                 )
-                logger.error(f"🔍 DEBUG: Response status: {response.status_code}")
-                logger.error(f"🔍 DEBUG: Response headers: {dict(response.headers)}")
+                logger.info(f"Response status: {response.status_code}")
+                logger.debug(f"Response headers: {dict(response.headers)}")
                 if response.status_code == 429:
                     retry_after = int(float(response.headers.get('retry-after', 10)))
-                    logger.error(f"🔁 Rate limited. Sleeping for {retry_after} seconds before retrying...")
+                    logger.warning(f"Rate limited. Sleeping for {retry_after} seconds before retrying...")
                     await asyncio.sleep(retry_after)
                     continue
                 response.raise_for_status()
                 result = response.json()
-                logger.error(f"🔍 DEBUG: Full API response: {result}")
+                logger.debug(f"Full API response: {result}")
                 content = result["choices"][0]["message"]["content"]
-                logger.error(f"🔍 DEBUG: Extracted content length: {len(content)}")
-                logger.error(f"🔍 DEBUG: First 200 chars of content: {content[:200]}...")
+                logger.info(f"Groq API call succeeded. Extracted content length: {len(content)}")
+                logger.debug(f"First 200 chars of content: {content[:200]}...")
                 return content
         except (httpx.ReadTimeout, httpx.ConnectTimeout, httpx.RequestError) as e:
-            logger.error(f"❌ ERROR in call_groq (attempt {attempt}): {e}")
-            logger.error(f"❌ ERROR type: {type(e)}")
+            logger.warning(f"Error in call_groq (attempt {attempt}): {e}")
+            logger.debug(f"Error type: {type(e)}")
             if attempt < max_retries:
-                logger.error(f"🔁 Retrying in 3 seconds...")
+                logger.info(f"Retrying in 3 seconds...")
                 await asyncio.sleep(3)
             else:
-                logger.error(f"❌ All {max_retries} attempts failed.")
+                logger.error(f"All {max_retries} attempts failed.")
                 raise
         except Exception as e:
-            logger.error(f"❌ ERROR in call_groq (non-retryable): {e}")
-            logger.error(f"❌ ERROR type: {type(e)}")
+            logger.error(f"Non-retryable error in call_groq: {e}")
+            logger.debug(f"Error type: {type(e)}")
             raise
 
 def extract_json_array(text):

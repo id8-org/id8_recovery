@@ -124,7 +124,7 @@ async def generate_personalized_deep_dive(
 ) -> Dict[str, Any]:
     """Generate personalized deep dive analysis based on user profile"""
     try:
-        logger.info(f"🔍 [PersonalizedDeepDive] Starting personalized deep dive for user {user.id}")
+        logger.info(f"[PersonalizedDeepDive] Starting personalized deep dive for user {user.id}")
         
         # Get user profile and resume
         profile = db.query(UserProfile).filter(UserProfile.user_id == user.id).first()
@@ -132,43 +132,43 @@ async def generate_personalized_deep_dive(
         
         # Build personalized context
         user_context = build_user_context(user, profile, resume)
-        logger.info(f"🔍 [PersonalizedDeepDive] Built user context (length: {len(user_context)})")
+        logger.info(f"[PersonalizedDeepDive] Built user context (length: {len(user_context)})")
         
         # Add user context to idea data for personalization
         enhanced_idea_data = idea_data.copy()
         enhanced_idea_data['user_context'] = user_context
-        logger.info(f"🔍 [PersonalizedDeepDive] Enhanced idea data keys: {list(enhanced_idea_data.keys())}")
+        logger.info(f"[PersonalizedDeepDive] Enhanced idea data keys: {list(enhanced_idea_data.keys())}")
         
         # Generate deep dive with personalized context
-        logger.info(f"🔍 [PersonalizedDeepDive] About to call generate_deep_dive")
+        logger.info(f"[PersonalizedDeepDive] About to call generate_deep_dive")
         result = await generate_deep_dive(enhanced_idea_data)
-        logger.info(f"🔍 [PersonalizedDeepDive] generate_deep_dive returned result type: {type(result)}")
-        logger.info(f"🔍 [PersonalizedDeepDive] Result keys: {list(result.keys()) if isinstance(result, dict) else 'Not a dict'}")
+        logger.info(f"[PersonalizedDeepDive] generate_deep_dive returned result type: {type(result)}")
+        logger.debug(f"[PersonalizedDeepDive] Result keys: {list(result.keys()) if isinstance(result, dict) else 'Not a dict'}")
         
         # Patch: Robustly handle missing sections like 'Product' and never raise
         deep_dive = result.get('deep_dive', {})
-        logger.info(f"🔍 [PersonalizedDeepDive] Deep dive type: {type(deep_dive)}")
-        logger.info(f"🔍 [PersonalizedDeepDive] Deep dive content: {deep_dive}")
+        logger.info(f"[PersonalizedDeepDive] Deep dive type: {type(deep_dive)}")
+        logger.debug(f"[PersonalizedDeepDive] Deep dive content: {deep_dive}")
         
         if isinstance(deep_dive, dict):
             for section in ["Signal Score", "Summary", "Product", "Market", "Moat", "Funding"]:
                 try:
                     content = safe_extract_section(deep_dive, section)
-                    logger.info(f"🔍 [PersonalizedDeepDive] Section '{section}' content length: {len(content) if content else 0}")
+                    logger.info(f"[PersonalizedDeepDive] Section '{section}' content length: {len(content) if content else 0}")
                     if not content:
                         logger.warning(f"[PersonalizedDeepDive] Section '{section}' missing in deep dive output for user {user.id}.")
                 except Exception as section_error:
-                    logger.error(f"🔍 [PersonalizedDeepDive] Error extracting section '{section}': {section_error}")
-                    logger.error(f"🔍 [PersonalizedDeepDive] Section error type: {type(section_error)}")
+                    logger.error(f"[PersonalizedDeepDive] Error extracting section '{section}': {section_error}")
+                    logger.error(f"[PersonalizedDeepDive] Section error type: {type(section_error)}")
         
         # Always return the result, even if some sections are missing
-        logger.info(f"🔍 [PersonalizedDeepDive] Returning result successfully")
+        logger.info(f"[PersonalizedDeepDive] Returning result successfully")
         return result
         
     except Exception as e:
-        logger.error(f"🔍 [PersonalizedDeepDive] Error generating personalized deep dive for user {user.id}: {e}")
-        logger.error(f"🔍 [PersonalizedDeepDive] Exception type: {type(e)}")
-        logger.error(f"🔍 [PersonalizedDeepDive] Exception traceback: {e}")
+        logger.error(f"[PersonalizedDeepDive] Error generating personalized deep dive for user {user.id}: {e}")
+        logger.debug(f"[PersonalizedDeepDive] Exception type: {type(e)}")
+        logger.debug(f"[PersonalizedDeepDive] Exception traceback: {e}")
         # Instead of raising, return a result with an error section
         return {
             "deep_dive": {
@@ -286,35 +286,35 @@ async def run_llm_with_user_context(
 
 def safe_extract_section(deep_dive, section_title):
     try:
-        logger.info(f"🔍 [SafeExtract] Extracting section '{section_title}' from deep_dive type: {type(deep_dive)}")
-        logger.info(f"🔍 [SafeExtract] Deep dive content: {deep_dive}")
+        logger.info(f"[SafeExtract] Extracting section '{section_title}' from deep_dive type: {type(deep_dive)}")
+        logger.debug(f"[SafeExtract] Deep dive content: {deep_dive}")
         
         if not isinstance(deep_dive, dict):
-            logger.warning(f"🔍 [SafeExtract] Deep dive is not a dict, it's {type(deep_dive)}")
+            logger.warning(f"[SafeExtract] Deep dive is not a dict, it's {type(deep_dive)}")
             return ''
             
         sections = deep_dive.get('sections', [])
-        logger.info(f"🔍 [SafeExtract] Sections type: {type(sections)}, length: {len(sections) if isinstance(sections, list) else 'not a list'}")
+        logger.info(f"[SafeExtract] Sections type: {type(sections)}, length: {len(sections) if isinstance(sections, list) else 'not a list'}")
         
         if not isinstance(sections, list):
-            logger.warning(f"🔍 [SafeExtract] Sections is not a list, it's {type(sections)}")
+            logger.warning(f"[SafeExtract] Sections is not a list, it's {type(sections)}")
             return ''
             
         for i, section in enumerate(sections):
-            logger.info(f"🔍 [SafeExtract] Section {i}: {section}")
+            logger.info(f"[SafeExtract] Section {i}: {section}")
             if isinstance(section, dict):
                 title = section.get('title', '')
-                logger.info(f"🔍 [SafeExtract] Section {i} title: '{title}'")
+                logger.debug(f"[SafeExtract] Section {i} title: '{title}'")
                 if section_title.lower() in title.lower():
                     content = section.get('content', '')
-                    logger.info(f"🔍 [SafeExtract] Found section '{section_title}' with content length: {len(content)}")
+                    logger.info(f"[SafeExtract] Found section '{section_title}' with content length: {len(content)}")
                     return content
         
-        logger.info(f"🔍 [SafeExtract] Section '{section_title}' not found in any section")
+        logger.info(f"[SafeExtract] Section '{section_title}' not found in any section")
         return ''
         
     except Exception as e:
-        logger.error(f"🔍 [SafeExtract] Error extracting section '{section_title}': {e}")
-        logger.error(f"🔍 [SafeExtract] Error type: {type(e)}")
-        logger.error(f"🔍 [SafeExtract] Deep dive that caused error: {deep_dive}")
+        logger.error(f"[SafeExtract] Error extracting section '{section_title}': {e}")
+        logger.debug(f"[SafeExtract] Error type: {type(e)}")
+        logger.debug(f"[SafeExtract] Deep dive that caused error: {deep_dive}")
         return '' 

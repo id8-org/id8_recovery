@@ -1,5 +1,8 @@
 version: "3.9"
 
+# All services now use the unified project root .env file for environment variables.
+# Do not use per-service .env files. See .env at the project root.
+
 services:
   db:
     image: postgres:15
@@ -26,18 +29,7 @@ services:
     build:
       context: ./backend
     env_file:
-      - backend/.env
-    environment:
-      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/ideas
-      - SECRET_KEY=your-super-secret-key-change-this-in-production
-      - ALGORITHM=HS256
-      - ACCESS_TOKEN_EXPIRE_MINUTES=30
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      - GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI:-http://localhost:8081}
-      - API_KEY=${API_KEY:-your-secure-api-key-here}
-      - PORT=8000
-      - LOG_LEVEL=INFO
+      - .env
     ports:
       - "8000:8000"
     depends_on:
@@ -59,9 +51,7 @@ services:
     build:
       context: ./frontend
     env_file:
-      - frontend/.env
-    environment:
-      - VITE_API_URL=http://localhost:8000
+      - .env
     ports:
       - "8081:8081"
     depends_on:
@@ -107,10 +97,7 @@ services:
       context: ./backend
     command: ["sh", "-c", "sleep 30 && python cron/nightly_runner.py"]
     env_file:
-      - backend/.env
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/ideas
-      - REDIS_URL=redis://redis:6379/0
+      - .env
     depends_on:
       db:
         condition: service_healthy
