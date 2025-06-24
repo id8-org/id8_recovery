@@ -120,29 +120,78 @@ const AppRoutes = ({ refreshFlag }) => {
     return (
       <OnboardingWizard 
         onComplete={async () => {
-          setGeneratingIdeas(true);
-          try {
-            // Use user's onboarding profile for personalization
-            const profile = (user?.profile || {}) as UserProfile;
-            const industry = profile.preferred_industries?.[0] || profile.industry || '';
-            const business_model = profile.preferred_business_models?.[0] || '';
-            await api.post('/ideas/generate', {
-              industry,
-              business_model,
-              context: '',
-              use_personalization: true,
-            });
-            await refreshUser();
-            setShowOnboarding(false);
-            refreshIdeas();
-            window.location.href = '/';
-          } catch (err) {
-            setGeneratingIdeas(false);
-            toast({
-              title: 'Idea Generation Failed',
-              description: 'Could not generate starter ideas. Please try again.',
-              variant: 'destructive',
-            });
+          await refreshUser(); // Ensure latest user/profile state
+          const refreshedUser = await api.get('/auth/me').then(res => res.data);
+          const config = refreshedUser?.config || {};
+          if (refreshedUser?.profile?.onboarding_completed) {
+            setGeneratingIdeas(true);
+            try {
+              // Use user's onboarding profile for personalization
+              const profile = (refreshedUser?.profile || {}) as UserProfile;
+              const industry = profile.preferred_industries?.[0] || profile.industry || '';
+              const business_model = profile.preferred_business_models?.[0] || '';
+              const usePersonalization = !!config.deep_dive;
+              const payload = {
+                industry,
+                business_model,
+                context: '',
+                use_personalization: usePersonalization,
+              };
+              console.log('🔍 Onboarding: Sending payload to /ideas/generate:', payload);
+              const response = await api.post('/ideas/generate', payload);
+              console.log('🔍 Onboarding: /ideas/generate response:', response.data);
+              await refreshUser();
+              await refreshIdeas();
+              if (response.data.ideas && response.data.ideas.length > 0) {
+                setShowOnboarding(false);
+                window.location.href = '/';
+              } else if (response.data.error && response.data.error.includes('limit')) {
+                setGeneratingIdeas(false);
+                toast({
+                  title: 'Idea Limit Reached',
+                  description: 'You have reached the maximum number of ideas for your plan. Upgrade to unlock more.',
+                  variant: 'destructive',
+                });
+              } else if (response.data.error && response.data.error.includes('premium')) {
+                setGeneratingIdeas(false);
+                toast({
+                  title: 'Premium Feature',
+                  description: 'Idea generation and Deep Dive are premium features. Upgrade to unlock personalized ideas.',
+                  variant: 'destructive',
+                });
+              } else {
+                setGeneratingIdeas(false);
+                toast({
+                  title: 'No Ideas Generated',
+                  description: 'We could not generate starter ideas for your profile. Please update your profile or try again.',
+                  variant: 'destructive',
+                });
+              }
+            } catch (err: any) {
+              setGeneratingIdeas(false);
+              if (err?.response?.data?.detail && err.response.data.detail.includes('limit')) {
+                toast({
+                  title: 'Idea Limit Reached',
+                  description: 'You have reached the maximum number of ideas for your plan. Upgrade to unlock more.',
+                  variant: 'destructive',
+                });
+              } else if (err?.response?.data?.detail && err.response.data.detail.includes('premium')) {
+                toast({
+                  title: 'Premium Feature',
+                  description: 'Idea generation and Deep Dive are premium features. Upgrade to unlock personalized ideas.',
+                  variant: 'destructive',
+                });
+              } else {
+                toast({
+                  title: 'Idea Generation Failed',
+                  description: 'Could not generate starter ideas. Please try again.',
+                  variant: 'destructive',
+                });
+              }
+            }
+          } else {
+            // If onboarding is not complete, stay on onboarding
+            setShowOnboarding(true);
           }
         }} 
       />
