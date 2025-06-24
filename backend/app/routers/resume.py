@@ -13,6 +13,7 @@ from app.schemas import UserResume
 from models import User as UserModel, UserResume as UserResumeModel, UserProfile as UserProfileModel
 from app.utils import extract_text_from_resume
 from llm import call_groq
+from app.tiers import get_tier_config, get_account_type_config
 
 router = APIRouter(prefix="/resume", tags=["resume"])
 
@@ -98,13 +99,16 @@ async def get_user_resume(
     db: Session = Depends(get_db)
 ):
     """Get current user's resume"""
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
     resume = db.query(UserResumeModel).filter(UserResumeModel.user_id == current_user.id).first()
     if not resume:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Resume not found"
         )
-    return resume
+    return {"resume": resume, "config": config}
 
 @router.delete("/")
 async def delete_user_resume(

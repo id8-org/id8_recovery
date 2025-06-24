@@ -12,6 +12,7 @@ import logging
 import os
 from app.services import personalized_idea_service, idea_service
 from app.utils import logger
+from app.tiers import get_tier_config, get_account_type_config
 
 logger = logging.getLogger(__name__)
 
@@ -53,20 +54,21 @@ def get_current_user_or_api(
 
 router = APIRouter()
 
-@router.get("/shortlist", response_model=List[IdeaOut])
+@router.get("/shortlist")
 def get_shortlisted_ideas(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    # Get user-specific shortlist
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
     shortlist = get_shortlist_ideas(db, user_id=current_user.id)
     idea_ids = [s.idea_id for s in shortlist]
     if not idea_ids:
-        return []
+        return {"ideas": [], "config": config}
     ideas = db.query(Idea).filter(Idea.id.in_(idea_ids)).all()
-    # Return in the order of the shortlist
     idea_map = {idea.id: idea for idea in ideas}
-    return [idea_map[iid] for iid in idea_ids if iid in idea_map]
+    return {"ideas": [idea_map[iid] for iid in idea_ids if iid in idea_map], "config": config}
 
 @router.post("/{idea_id}/shortlist", response_model=ShortlistOut)
 def add_idea_to_shortlist(
@@ -152,18 +154,19 @@ def update_status_api(idea_id: str, status: str = Body(...), db: Session = Depen
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
-@router.get("/all", response_model=List[IdeaOut])
+@router.get("/all")
 def get_all_ideas(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Get all ideas for the current user"""
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
     try:
-        # Get user-specific ideas ONLY
         ideas = db.query(Idea).filter(
             Idea.user_id == current_user.id
         ).order_by(Idea.created_at.desc()).all()
-        return ideas
+        return {"ideas": ideas, "config": config}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch ideas: {str(e)}")
 
@@ -173,12 +176,14 @@ async def generate_ideas(
     current_user: User = Depends(get_current_user_or_api),
     db: Session = Depends(get_db)
 ):
-    # Check if user has completed onboarding (only for web users, not API users)
-    if current_user.id != "api_user" and (not current_user.profile or not current_user.profile.onboarding_completed):
-        raise HTTPException(
-            status_code=403,
-            detail="Please complete your onboarding profile before generating ideas"
-        )
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
+    user_idea_count = db.query(Idea).filter(Idea.user_id == current_user.id).count()
+    if user_idea_count >= config["max_ideas"]:
+        raise HTTPException(status_code=403, detail="Idea limit reached for your plan. Upgrade to create more.", headers={"X-Config": str(config)})
+    if not config.get("deep_dive", False) and request.use_personalization:
+        raise HTTPException(status_code=403, detail="Deep Dive is a premium feature. Upgrade to access.", headers={"X-Config": str(config)})
     
     try:
         # Build context for idea generation
@@ -222,14 +227,16 @@ async def generate_ideas(
                 "ideas": [],
                 "error": "No valid ideas were parsed from the LLM response.",
                 "llm_raw_response": result.get('raw', ''),
+                "config": config
             }
         
-        return {"ideas": [IdeaOut.model_validate(i) for i in ideas]}
+        return {"ideas": [IdeaOut.model_validate(i) for i in ideas], "config": config}
     except Exception as e:
         logger.error(f"Error generating ideas: {e}")
         return {
             "ideas": [],
             "error": f"Failed to generate ideas: {str(e)}",
+            "config": config
         }
 
 @router.get("/{idea_id}", response_model=IdeaOut)
@@ -277,13 +284,18 @@ def create_idea(
     db.refresh(idea)
     return idea
 
-@router.post("/validate", response_model=dict)
+@router.post("/validate")
 async def validate_user_idea(
     idea_data: dict = Body(...),
     use_personalization: bool = Body(True),
     current_user: User = Depends(get_current_user_or_api),
     db: Session = Depends(get_db)
 ):
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
+    if use_personalization and not config.get("deep_dive", False):
+        raise HTTPException(status_code=403, detail="Deep Dive is a premium feature. Upgrade to access.", headers={"X-Config": str(config)})
     """Validate and analyze a user's own idea"""
     # Check if user has completed onboarding (only for web users, not API users)
     if current_user.id != "api_user" and (not current_user.profile or not current_user.profile.onboarding_completed):
@@ -335,7 +347,8 @@ Call to Action: {idea_data.get('call_to_action', 'N/A')}
         return {
             "idea": IdeaOut.model_validate(db_idea),
             "analysis": result.get('deep_dive', {}),
-            "validation_type": "personalized" if use_personalization and current_user.id != "api_user" else "generic"
+            "validation_type": "personalized" if use_personalization and current_user.id != "api_user" else "generic",
+            "config": config
         }
         
     except Exception as e:
@@ -397,13 +410,18 @@ def update_idea(
     db.refresh(idea)
     return idea
 
-@router.post("/{idea_id}/deepdive", response_model=IdeaOut)
+@router.post("/{idea_id}/deepdive")
 async def trigger_deep_dive_api(
     idea_id: str,
     use_personalization: bool = Body(True),
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
+    if not config.get("deep_dive", False):
+        raise HTTPException(status_code=403, detail="Deep Dive is a premium feature. Upgrade to access.", headers={"X-Config": str(config)})
     """Trigger a deep dive analysis for an idea"""
     # Get the idea
     idea = db.query(Idea).filter(Idea.id == idea_id).first()
@@ -457,7 +475,7 @@ async def trigger_deep_dive_api(
         
         db.commit()
         db.refresh(idea)
-        return idea
+        return {"idea": idea, "config": config}
         
     except Exception as e:
         logger.error(f"[DeepDive] Error triggering deep dive for idea {idea_id}: {e}")
@@ -478,7 +496,7 @@ async def trigger_deep_dive_api(
         }
         db.commit()
         db.refresh(idea)
-        return idea
+        return {"idea": idea, "config": config}
 
 @router.post("/{idea_id}/business-model", response_model=dict)
 async def generate_business_model_api(

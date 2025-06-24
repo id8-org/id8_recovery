@@ -16,6 +16,10 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     is_verified = Column(Boolean, default=False)
     
+    # Tier and account type
+    tier = Column(Enum('free', 'premium', name='user_tier'), default='free', nullable=False)
+    account_type = Column(Enum('solo', 'team', name='user_account_type'), default='solo', nullable=False)
+    
     # OAuth fields
     oauth_provider = Column(String, nullable=True)  # 'google', 'email', etc.
     oauth_id = Column(String, nullable=True)  # Google user ID

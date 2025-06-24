@@ -214,19 +214,45 @@ export const getIdeas = async (repoId: string) => {
   }
 };
 
-export const triggerDeepDive = async (ideaId: string) => {
+export interface Config {
+  max_ideas: number;
+  deep_dive: boolean;
+  market_snapshot: boolean;
+  lenses: boolean;
+  export_tools: boolean;
+  team: boolean;
+  priority_support: boolean;
+  max_team_members: number;
+  collaboration: boolean;
+  [key: string]: any;
+}
+
+export const getAllIdeas = async (): Promise<{ ideas: Idea[]; config: Config }> => {
   try {
-    console.log('🔍 DEBUG: triggerDeepDive called for idea:', ideaId);
+    const response = await api.get('/ideas/all');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all ideas:', error);
+    throw error;
+  }
+};
+
+export const getShortlist = async (): Promise<{ ideas: Idea[]; config: Config }> => {
+  try {
+    const response = await api.get('/ideas/shortlist');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching shortlist:', error);
+    throw error;
+  }
+};
+
+export const triggerDeepDive = async (ideaId: string): Promise<{ idea: Idea; config: Config }> => {
+  try {
     const response = await api.post(`/ideas/${ideaId}/deepdive`);
-    console.log('🔍 DEBUG: triggerDeepDive response:', response.data);
     return response.data;
   } catch (error: unknown) {
     console.error('❌ ERROR: triggerDeepDive failed:', error);
-    if (error && typeof error === 'object' && 'response' in error) {
-      const axiosError = error as { response: { data: unknown; status: number } };
-      console.error('❌ ERROR: Response data:', axiosError.response.data);
-      console.error('❌ ERROR: Response status:', axiosError.response.status);
-    }
     throw error;
   }
 };
@@ -334,16 +360,6 @@ export const getStats = async () => {
   }
 };
 
-export const getShortlist = async () => {
-  try {
-    const response = await api.get('/ideas/shortlist');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching shortlist:', error);
-    throw error;
-  }
-};
-
 export const addToShortlist = async (ideaId: string) => {
   try {
     const response = await api.post(`/ideas/${ideaId}/shortlist`);
@@ -410,16 +426,6 @@ export const restoreDeepDiveVersion = async (ideaId: string, versionNumber: numb
     return response.data;
   } catch (error) {
     console.error('Error restoring deep dive version:', error);
-    throw error;
-  }
-};
-
-export const getAllIdeas = async () => {
-  try {
-    const response = await api.get('/ideas/all');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching all ideas:', error);
     throw error;
   }
 };

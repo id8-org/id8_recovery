@@ -26,11 +26,13 @@ from app.schemas import (
     OnboardingStep4,
     OnboardingStep5,
     GoogleAuthRequest,
-    GoogleCodeRequest
+    GoogleCodeRequest,
+    UserProfileResponse
 )
 from models import User as UserModel, UserProfile as UserProfileModel, Idea
 from app.google_auth import authenticate_google_user, authenticate_google_user_with_code
 import logging
+from app.tiers import get_tier_config, get_account_type_config
 
 logger = logging.getLogger(__name__)
 
@@ -193,9 +195,21 @@ async def google_auth_with_code(auth_request: GoogleCodeRequest, db: Session = D
 @router.get("/me", response_model=User)
 async def get_current_user_info(current_user: UserModel = Depends(get_current_active_user)):
     """Get current user information"""
-    return current_user
+    # Build config from tier and account type
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
+    # Return user with tier, account_type, and config
+    user_dict = current_user.__dict__.copy()
+    user_dict["tier"] = current_user.tier
+    user_dict["account_type"] = current_user.account_type
+    user_dict["config"] = config
+    # Attach profile if present
+    if hasattr(current_user, "profile") and current_user.profile:
+        user_dict["profile"] = current_user.profile
+    return user_dict
 
-@router.get("/profile", response_model=UserProfile)
+@router.get("/profile", response_model=UserProfileResponse)
 async def get_user_profile(
     current_user: UserModel = Depends(get_current_active_user),
     db: Session = Depends(get_db)
@@ -207,7 +221,16 @@ async def get_user_profile(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Profile not found"
         )
-    return profile
+    # Build config from tier and account type
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
+    return {
+        "profile": profile,
+        "tier": current_user.tier,
+        "account_type": current_user.account_type,
+        "config": config
+    }
 
 @router.post("/profile", response_model=UserProfile)
 async def create_user_profile(

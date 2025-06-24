@@ -145,6 +145,12 @@ class UserProfile(UserProfileBase):
     class Config:
         from_attributes = True
 
+class UserProfileResponse(BaseModel):
+    profile: UserProfile
+    tier: str
+    account_type: str
+    config: dict
+
 # User schemas
 class UserBase(BaseModel):
     email: EmailStr
@@ -161,6 +167,9 @@ class User(UserBase):
     created_at: datetime
     updated_at: datetime
     profile: Optional[UserProfile] = None
+    tier: str
+    account_type: str
+    config: Optional[dict] = None
 
     class Config:
         from_attributes = True

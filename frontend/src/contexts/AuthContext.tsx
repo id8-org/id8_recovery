@@ -41,6 +41,7 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   isLoading: boolean;
+  config: any | null;
   login: (email: string, password: string) => Promise<void>;
   loginWithToken: (access_token: string) => Promise<void>;
   register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
@@ -68,6 +69,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
   const [isLoading, setIsLoading] = useState(true);
+  const [config, setConfig] = useState<any | null>(null);
 
   // Set up axios interceptor for authentication
   useEffect(() => {
@@ -85,6 +87,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         try {
           const response = await api.get('/auth/me');
           setUser(response.data);
+          setConfig(response.data.config || null);
         } catch (error) {
           console.error('Auth check failed:', error);
           localStorage.removeItem('token');
@@ -118,6 +121,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Fetch user data
       const userResponse = await api.get('/auth/me');
       setUser(userResponse.data);
+      setConfig(userResponse.data.config || null);
     } catch (error: any) {
       throw new Error(error.response?.data?.detail || 'Login failed');
     }
@@ -134,6 +138,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Fetch user data
       const userResponse = await api.get('/auth/me');
       setUser(userResponse.data);
+      setConfig(userResponse.data.config || null);
     } catch (error: any) {
       console.error('Token login error:', error);
       throw new Error(error.response?.data?.detail || 'Token login failed');
@@ -157,6 +162,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Fetch user data
       const userResponse = await api.get('/auth/me');
       setUser(userResponse.data);
+      setConfig(userResponse.data.config || null);
     } catch (error: any) {
       throw new Error(error.response?.data?.detail || 'Registration failed');
     }
@@ -166,12 +172,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem('token');
     setToken(null);
     setUser(null);
+    setConfig(null);
   };
 
   const updateProfile = async (profileData: Partial<UserProfile>) => {
     try {
       const response = await api.put('/auth/profile', profileData);
       setUser(prev => prev ? { ...prev, profile: response.data } : null);
+      // Optionally refresh config if profile update can affect it
+      const userResponse = await api.get('/auth/me');
+      setConfig(userResponse.data.config || null);
     } catch (error: any) {
       throw new Error(error.response?.data?.detail || 'Profile update failed');
     }
@@ -180,7 +190,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const getProfile = async (): Promise<UserProfile | null> => {
     try {
       const response = await api.get('/auth/profile');
-      return response.data;
+      setConfig(response.data.config || null);
+      return response.data.profile;
     } catch (error: any) {
       if (error.response?.status === 404) {
         return null;
@@ -193,6 +204,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await api.get('/auth/me');
       setUser(response.data);
+      setConfig(response.data.config || null);
     } catch (error: any) {
       console.error('Failed to refresh user:', error);
       throw new Error(error.response?.data?.detail || 'Failed to refresh user');
@@ -203,6 +215,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     user,
     token,
     isLoading,
+    config,
     login,
     loginWithToken,
     register,

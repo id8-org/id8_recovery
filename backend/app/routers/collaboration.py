@@ -8,6 +8,7 @@ from ..auth import get_current_user
 from .. import schemas
 from models import User, Idea, IdeaCollaborator, IdeaChangeProposal, Comment
 import crud
+from app.tiers import get_tier_config, get_account_type_config
 
 logger = logging.getLogger(__name__)
 
@@ -51,14 +52,21 @@ def add_collaborator_to_idea(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    tier_config = get_tier_config(current_user.tier)
+    account_type_config = get_account_type_config(current_user.account_type)
+    config = {**tier_config, **account_type_config}
+    if not config.get("collaboration", False):
+        raise HTTPException(status_code=403, detail="Collaboration is only available on Team plans.", headers={"X-Config": str(config)})
+    # Enforce max_team_members
+    team_count = db.query(IdeaCollaborator).filter(IdeaCollaborator.idea_id == idea_id).count()
+    if team_count >= config["max_team_members"]:
+        raise HTTPException(status_code=403, detail="Team member limit reached for your plan.", headers={"X-Config": str(config)})
     idea = get_idea_and_check_ownership(idea_id, db, current_user)
-    
-    # Check if user exists
     user_to_add = db.query(User).filter(User.id == collaborator.user_id).first()
     if not user_to_add:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User to add not found")
-        
-    return crud.add_collaborator(db=db, idea_id=idea_id, user_id=collaborator.user_id, role=collaborator.role)
+    result = crud.add_collaborator(db=db, idea_id=idea_id, user_id=collaborator.user_id, role=collaborator.role)
+    return {"collaborator": result, "config": config}
 
 @router.get("/ideas/{idea_id}/collaborators", response_model=List[schemas.IdeaCollaboratorOut])
 def get_idea_collaborators(
