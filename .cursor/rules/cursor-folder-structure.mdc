@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Folder Structure
+
+```
+idea8/
+├── backend/    # FastAPI app, DB models, routers, services, scripts
+├── frontend/   # React app, UI components, pages, hooks, contexts
+├── website/    # Next.js marketing site (optional)
+├── docker-compose.yml, .env, start.sh  # Orchestration & config
+```
+
+- **backend/app/**: Main FastAPI app, routers, schemas, services, models
+- **backend/scripts/**: DB migrations, seeders, utilities
+- **frontend/src/components/**: Modular React UI components (shadcn/ui, custom)
+- **frontend/src/pages/**: Main app pages (Dashboard, Profile, Settings, etc.)
+- **frontend/src/contexts/**: React Context API for state (e.g., Auth)
+- **frontend/src/hooks/**: Custom React hooks
+- **frontend/src/lib/**: API utilities, helpers
+- **website/src/app/**: Next.js marketing/landing page

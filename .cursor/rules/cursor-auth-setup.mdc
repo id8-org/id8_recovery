@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Auth Setup
+
+## Backend (FastAPI)
+- JWT-based authentication (access tokens)
+- OAuth support (Google)
+- User, profile, and team models
+- Endpoints: `/auth/register`, `/auth/login`, `/auth/me`, `/auth/profile`, `/auth/google`
+- Tier/account type returned in `/auth/me` and `/auth/profile`
+
+## Frontend (React)
+- AuthContext manages user state, tokens, and profile
+- Login/Register forms in `components/auth/`
+- Google OAuth handled via popup and callback
+- Auth state is refreshed after onboarding and login
+- Protected routes redirect to login if unauthenticated

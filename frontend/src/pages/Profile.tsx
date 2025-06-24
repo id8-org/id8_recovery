@@ -173,36 +173,30 @@ const Profile = () => {
                 <CardDescription>{user.email}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {user.profile?.location && (
+                <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 text-sm text-slate-600">
                     <MapPin className="h-4 w-4" />
-                    {user.profile.location}
+                    {user.profile?.location || <span className="italic text-slate-400">Not set</span>}
                   </div>
-                )}
-                {user.profile?.website && (
                   <div className="flex items-center gap-2 text-sm text-slate-600">
                     <Globe className="h-4 w-4" />
-                    <a href={user.profile.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                      {user.profile.website}
-                    </a>
+                    {user.profile?.website ? (
+                      <a href={user.profile.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{user.profile.website}</a>
+                    ) : <span className="italic text-slate-400">Not set</span>}
                   </div>
-                )}
-                {user.profile?.linkedin_url && (
                   <div className="flex items-center gap-2 text-sm text-slate-600">
                     <Linkedin className="h-4 w-4" />
-                    <a href={user.profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                      LinkedIn Profile
-                    </a>
+                    {user.profile?.linkedin_url ? (
+                      <a href={user.profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">LinkedIn</a>
+                    ) : <span className="italic text-slate-400">Not set</span>}
                   </div>
-                )}
-                {user.profile?.github_url && (
                   <div className="flex items-center gap-2 text-sm text-slate-600">
                     <Github className="h-4 w-4" />
-                    <a href={user.profile.github_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                      GitHub Profile
-                    </a>
+                    {user.profile?.github_url ? (
+                      <a href={user.profile.github_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">GitHub</a>
+                    ) : <span className="italic text-slate-400">Not set</span>}
                   </div>
-                )}
+                </div>
                 <div className="flex items-center gap-2 text-sm text-slate-600">
                   <span>Tier:</span>
                   <Badge>{user.tier ? user.tier.charAt(0).toUpperCase() + user.tier.slice(1) : 'Free'}</Badge>
@@ -587,46 +581,38 @@ const Profile = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {user.profile?.preferred_business_models?.length > 0 && (
-                  <div>
-                    <Label className="text-sm font-medium text-slate-700">Preferred Business Models</Label>
+                <div>
+                  <Label className="text-sm font-medium text-slate-700">Preferred Business Models</Label>
+                  {user.profile?.preferred_business_models?.length > 0 ? (
                     <div className="flex flex-wrap gap-2 mt-1">
                       {user.profile.preferred_business_models.map((model, index) => (
-                        <Badge key={index} variant="secondary">
-                          {model}
-                        </Badge>
+                        <Badge key={index} variant="secondary">{model}</Badge>
                       ))}
                     </div>
-                  </div>
-                )}
-                {user.profile?.preferred_industries?.length > 0 && (
-                  <div>
-                    <Label className="text-sm font-medium text-slate-700">Preferred Industries</Label>
+                  ) : <span className="italic text-slate-400">Not set</span>}
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-slate-700">Preferred Industries</Label>
+                  {user.profile?.preferred_industries?.length > 0 ? (
                     <div className="flex flex-wrap gap-2 mt-1">
                       {user.profile.preferred_industries.map((industry, index) => (
-                        <Badge key={index} variant="outline">
-                          {industry}
-                        </Badge>
+                        <Badge key={index} variant="outline">{industry}</Badge>
                       ))}
                     </div>
-                  </div>
-                )}
-                {user.profile?.risk_tolerance && (
-                  <div>
-                    <Label className="text-sm font-medium text-slate-700">Risk Tolerance</Label>
-                    <Badge variant="secondary" className="mt-1">
-                      {user.profile.risk_tolerance}
-                    </Badge>
-                  </div>
-                )}
-                {user.profile?.time_availability && (
-                  <div>
-                    <Label className="text-sm font-medium text-slate-700">Time Availability</Label>
-                    <Badge variant="secondary" className="mt-1">
-                      {user.profile.time_availability}
-                    </Badge>
-                  </div>
-                )}
+                  ) : <span className="italic text-slate-400">Not set</span>}
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-slate-700">Risk Tolerance</Label>
+                  {user.profile?.risk_tolerance ? (
+                    <Badge variant="secondary" className="mt-1">{user.profile.risk_tolerance}</Badge>
+                  ) : <span className="italic text-slate-400">Not set</span>}
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-slate-700">Time Availability</Label>
+                  {user.profile?.time_availability ? (
+                    <Badge variant="secondary" className="mt-1">{user.profile.time_availability}</Badge>
+                  ) : <span className="italic text-slate-400">Not set</span>}
+                </div>
               </CardContent>
             </Card>
 

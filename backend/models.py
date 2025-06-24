@@ -17,7 +17,7 @@ class User(Base):
     is_verified = Column(Boolean, default=False)
     
     # Tier and account type
-    tier = Column(Enum('free', 'premium', name='user_tier'), default='free', nullable=False)
+    tier = Column(Enum('free', 'premium', name='user_tier'), default='premium', nullable=False)
     account_type = Column(Enum('solo', 'team', name='user_account_type'), default='solo', nullable=False)
     team_id = Column(String, ForeignKey("teams.id"), nullable=True)
     

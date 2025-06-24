@@ -361,8 +361,34 @@ github_service = GitHubTrendingService()
 
 # Backward compatibility functions
 async def fetch_trending(language: str, period: str = "daily") -> List[Dict[str, Any]]:
-    """Backward compatibility function"""
-    return await github_service.fetch_trending(language, period)
+    """
+    Fetch trending repositories from the GitHub Trending API JSON feed and map to backend Repo model.
+    """
+    try:
+        url = "https://raw.githubusercontent.com/isboyjc/github-trending-api/main/data/daily/all.json"
+        logger.info(f"Fetching trending repos for {language} from {url}")
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(url)
+            response.raise_for_status()
+            data = response.json()
+            items = data.get("items", [])
+
+            # Filter by language (case-insensitive)
+            filtered = [
+                {
+                    "name": item["title"] if "title" in item else "",
+                    "url": item["url"] if "url" in item else "",
+                    "description": item["description"] if "description" in item else "",
+                    "language": item["language"] if "language" in item else "Unknown",
+                }
+                for item in items
+                if isinstance(item, dict) and "language" in item and isinstance(item["language"], str) and item["language"].lower() == language.lower()
+            ]
+            logger.info(f"Found {len(filtered)} trending repos for language: {language}")
+            return filtered
+    except Exception as e:
+        logger.error(f"Error fetching trending repos for {language}: {e}")
+        return []
 
 async def refresh_trending_repos(db, languages: Optional[List[str]] = None, period: str = "daily") -> int:
     """Refresh trending repositories with enhanced service"""

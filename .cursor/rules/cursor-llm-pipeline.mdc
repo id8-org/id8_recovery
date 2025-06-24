@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# LLM Pipeline
+
+- **Idea Generation:**
+  - `/ideas/generate` endpoint triggers LLM (Groq/Mistral 7B)
+  - Context built from onboarding/profile data
+  - Tier-aware: Free = generic, Premium = personalized
+- **Deep Dive:**
+  - `/ideas/{id}/deepdive` runs LLM for market, product, funding, moat
+  - Results parsed, versioned, and saved
+- **Validation:**
+  - `/ideas/validate` analyzes user-submitted ideas
+  - Uses LLM for analysis, returns structured feedback
+- **Backend:**
+  - Centralized LLM orchestration in `services/`
+  - Logs all LLM calls and responses for debugging

@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Idea Lifecycle
+
+1. **Generation:**
+   - User completes onboarding
+   - Calls `/ideas/generate` (tier-aware, personalized if premium)
+   - Ideas are created and listed in workspace
+2. **Refinement:**
+   - User can edit, rerun LLM, or create new versions
+   - All fields are editable; changes are versioned
+3. **Deep Dive:**
+   - User triggers deep dive for market, product, funding, moat
+   - Results are saved and can be restored/branched
+4. **Collaboration:**
+   - Team members can propose changes, comment, and @mention
+   - Change proposals are tracked and can be approved/merged
+5. **History:**
+   - All versions and deep dives are accessible
+   - Users can restore, branch, or compare versions

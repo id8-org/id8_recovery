@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Style Guide
+
+- **Design System:** TailwindCSS + shadcn/ui components
+- **Color Palette:** SaaS modern (neutrals, blues, soft accents)
+- **Typography:** Inter, sans-serif; clear hierarchy, responsive
+- **Layout:** Flex/Grid, whitespace, responsive for all devices
+- **Components:** Modular, composable, accessible
+- **States:** Consistent hover, focus, error, and empty states
+- **Accessibility:** Sufficient contrast, keyboard nav, ARIA as needed
+- **Animation:** Subtle transitions (hover, fade, scale) for interactivity

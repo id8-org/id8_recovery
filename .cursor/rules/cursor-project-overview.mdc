@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Overview: ID8
+
+ID8 is a modern SaaS platform for AI-powered idea generation, validation, and team collaboration. Built with a full-stack TypeScript/React frontend, FastAPI backend, and PostgreSQL, it enables founders and innovators to discover, refine, and launch new ventures faster than ever.
+
+**Stack:**
+- Frontend: React, TypeScript, TailwindCSS, shadcn/ui
+- Backend: FastAPI, Python, PostgreSQL
+- LLM: Groq (Mistral 7B)
+- Deployment: Docker, Fly.io
+
+**Key Features:**
+- Personalized AI idea generation and deep dives
+- Robust onboarding and team management
+- Iterative idea refinement and versioning
+- SaaS tiering (Free/Premium)
+- Modern, responsive, accessible UI
+
+**Philosophy:**
+- Modular, composable, and maintainable code
+- Strict separation of concerns (UI, logic, data, state)
+- Frontend is "dumb" (presentation/data flow only)
+- Backend and API are always in sync with frontend
+- Production-quality UX and business logic by default

@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Form Handling
+
+- All forms use controlled React components for state
+- Validation is handled with Zod (frontend) and Pydantic (backend)
+- Use clear labels, helper text, and error messages
+- Show validation errors inline and on submit
+- Use shadcn/ui form components for consistent UX
+- Onboarding and profile forms are multi-step, mobile-friendly, and accessible
+- API errors are surfaced as toasts or inline messages
+- Always reset form state on cancel or successful submit
