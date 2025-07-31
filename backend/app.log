@@ -4410,3 +4410,547 @@ You are an experienced entrepreneur and technologist with expertise in:
     "hook": "Drowning in technical debt? Reduce code complexity...",
     "value": "RAGFlow's AI detects and prioritizes technical debt...",
     ...
+2025-07-31 20:13:59 - llm - ERROR - Non-retryable error in call_groq: Client error '401 Unauthorized' for url 'https://api.groq.com/openai/v1/chat/completions'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:04 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:41 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:17:43 - error_handlers - ERROR - Unhandled exception: Error 111 connecting to localhost:6379. Connection refused. - http://localhost:8000/ideas/8826c84f-948c-4d73-a949-3c36beea333d/status
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/usr/local/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routers/ideas.py", line 153, in update_status_api
+    updated_idea = update_idea_status(db, idea_id, status)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/crud.py", line 219, in update_idea_status
+    return idea_service.update_status(db, idea_id, new_status)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/idea_service.py", line 41, in update_status
+    self.event_bus.emit('idea.status.updated', idea_id=idea_id, new_status=new_status, repo_id=idea.repo_id)
+  File "/app/app/services/event_bus.py", line 61, in emit
+    self.redis_client.publish(event_name, json.dumps(kwargs, default=default_serializer))
+  File "/usr/local/lib/python3.11/site-packages/redis/commands/core.py", line 5191, in publish
+    return self.execute_command("PUBLISH", channel, message, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:21:43 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:22:47 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:35 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:23:44 - error_handlers - ERROR - Unhandled exception: Error 111 connecting to localhost:6379. Connection refused. - http://localhost:8000/ideas/1f488dc2-e64d-477a-b1dc-5b28846e3176/status
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/usr/local/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routers/ideas.py", line 153, in update_status_api
+    updated_idea = update_idea_status(db, idea_id, status)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/crud.py", line 219, in update_idea_status
+    return idea_service.update_status(db, idea_id, new_status)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/idea_service.py", line 41, in update_status
+    self.event_bus.emit('idea.status.updated', idea_id=idea_id, new_status=new_status, repo_id=idea.repo_id)
+  File "/app/app/services/event_bus.py", line 61, in emit
+    self.redis_client.publish(event_name, json.dumps(kwargs, default=default_serializer))
+  File "/usr/local/lib/python3.11/site-packages/redis/commands/core.py", line 5191, in publish
+    return self.execute_command("PUBLISH", channel, message, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:09 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:23 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:38 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:26:43 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:37:55 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:52:07 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:15 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:54:19 - error_handlers - ERROR - Unhandled exception: Error 111 connecting to localhost:6379. Connection refused. - http://localhost:8000/ideas/8826c84f-948c-4d73-a949-3c36beea333d/status
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/usr/local/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routers/ideas.py", line 153, in update_status_api
+    updated_idea = update_idea_status(db, idea_id, status)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/crud.py", line 219, in update_idea_status
+    return idea_service.update_status(db, idea_id, new_status)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/idea_service.py", line 41, in update_status
+    self.event_bus.emit('idea.status.updated', idea_id=idea_id, new_status=new_status, repo_id=idea.repo_id)
+  File "/app/app/services/event_bus.py", line 61, in emit
+    self.redis_client.publish(event_name, json.dumps(kwargs, default=default_serializer))
+  File "/usr/local/lib/python3.11/site-packages/redis/commands/core.py", line 5191, in publish
+    return self.execute_command("PUBLISH", channel, message, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:17 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:55:54 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:08 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:08 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo 066d86ed-3858-4958-803c-1d6d5d9b5ba9: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo 1cbcad04-2e25-4806-a462-264fd0e4cc2d: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo 95a589f0-60ac-4a4a-bbb1-49695509a7e8: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo a19531da-0b61-4c93-9a78-9e25a1b58003: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo aa63fdb2-a5e6-4cfb-8df1-450462db6cca: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo b6e1a531-95fc-4b07-b234-d0c7f8999630: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo 9fcee9bf-5e7e-4169-b9c3-8fa9062f1380: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - crud - ERROR - Error getting ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo 01659f24-f14b-4ddb-becb-44be0e2b52f7: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo f529b694-4294-42ce-8eeb-8037006c647f: Error 111 connecting to localhost:6379. Connection refused.
+2025-07-31 20:56:28 - routers.ideas - ERROR - Error fetching ideas for repo 903f3cb7-137e-4fa3-8997-ef312b4265c2: Error 111 connecting to localhost:6379. Connection refused.

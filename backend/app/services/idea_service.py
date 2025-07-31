@@ -3,10 +3,7 @@ import logging
 from app.schemas import IdeaOut
 import os
 from app.db import SessionLocal
-try:
-    import redis
-except ImportError:
-    redis = None
+import redis.asyncio as redis
 import threading
 from llm import generate_deep_dive
 from crud import save_deep_dive
@@ -14,12 +11,10 @@ import asyncio
 from app.services.github import fetch_trending
 from llm import generate_idea_pitches
 
-redis_client = None
-if redis:
-    try:
-        redis_client = redis.Redis.from_url(os.environ.get('REDIS_URL', 'redis://localhost:6379/0'))
-    except Exception:
-        redis_client = None
+try:
+    redis_client = redis.from_url(os.environ.get('REDIS_URL', 'redis://redis:6379/0'))
+except Exception:
+    redis_client = None
 
 logger = logging.getLogger(__name__)
 

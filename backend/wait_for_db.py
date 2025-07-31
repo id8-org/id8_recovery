@@ -9,11 +9,13 @@ from psycopg2 import OperationalError
 
 def wait_for_db():
     """Wait for database to be ready"""
-    database_url = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@db:5432/app")
+    database_url = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@db:5432/i8db")
     
     # Convert async URL to sync URL for psycopg2
     if database_url.startswith("postgresql+asyncpg://"):
         database_url = database_url.replace("postgresql+asyncpg://", "postgresql://")
+    elif database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://")
     
     # Connect to the default 'postgres' database instead of 'app' (which doesn't exist yet)
     # Extract connection details from the URL
@@ -68,4 +70,4 @@ if __name__ == "__main__":
     if wait_for_db():
         exit(0)
     else:
-        exit(1) 
+        exit(1)

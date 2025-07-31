@@ -28,7 +28,7 @@ import os
 import psycopg2
 from psycopg2 import OperationalError
 
-database_url = os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@db:5432/ideas')
+database_url = os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@db:5432/i8db')
 if database_url.startswith('postgresql+asyncpg://'):
     database_url = database_url.replace('postgresql+asyncpg://', 'postgresql://')
 
